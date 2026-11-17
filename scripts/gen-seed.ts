@@ -8,8 +8,10 @@ const out: string[] = ['-- Dibuat oleh scripts/gen-seed.ts dari src/data/default
 for (const t of ['services', 'portfolio_items', 'testimonials', 'pricing_tiers', 'process_steps', 'faqs'] as const) {
   const rows = (d as any)[t] as Record<string, unknown>[];
   const cols = Object.keys(rows[0]);
+  out.push(`do $$ begin if not exists (select 1 from public.dev_${t}) then`);
   out.push(`insert into public.dev_${t} (${cols.join(', ')}, sort_order) values`);
   out.push(rows.map((r, i) => `  (${cols.map(c => q(r[c])).join(', ')}, ${(i + 1) * 10})`).join(',\n') + ';');
+  out.push('end if; end $$;');
 }
 for (const [k, v] of Object.entries(d.settings)) out.push(`insert into public.dev_site_settings (key, value) values ('${k}', '${JSON.stringify(v).replace(/'/g, "''")}'::jsonb) on conflict (key) do nothing;`);
 out.push('commit;');

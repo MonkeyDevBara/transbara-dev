@@ -79,27 +79,38 @@ end $$;
 
 -- RLS ------------------------------------------------------------------
 alter table public.dev_admins enable row level security;
+drop policy if exists "admin lihat dirinya" on public.dev_admins;
 create policy "admin lihat dirinya" on public.dev_admins for select to authenticated using (user_id = auth.uid());
 
 do $$ declare t text; begin
   foreach t in array array['dev_services','dev_portfolio_items','dev_testimonials','dev_pricing_tiers','dev_process_steps','dev_faqs'] loop
     execute format('alter table public.%I enable row level security', t);
+    execute format('drop policy if exists "publik baca terbit" on public.%I', t);
+    execute format('drop policy if exists "admin tulis" on public.%I', t);
     execute format('create policy "publik baca terbit" on public.%I for select to anon, authenticated using (published or public.dev_is_admin())', t);
     execute format('create policy "admin tulis" on public.%I for all to authenticated using (public.dev_is_admin()) with check (public.dev_is_admin())', t);
   end loop;
 end $$;
 
 alter table public.dev_site_settings enable row level security;
+drop policy if exists "publik baca" on public.dev_site_settings;
 create policy "publik baca" on public.dev_site_settings for select to anon, authenticated using (true);
+drop policy if exists "admin tulis" on public.dev_site_settings;
 create policy "admin tulis" on public.dev_site_settings for all to authenticated using (public.dev_is_admin()) with check (public.dev_is_admin());
 
 alter table public.dev_leads enable row level security;
+drop policy if exists "publik kirim lead" on public.dev_leads;
 create policy "publik kirim lead" on public.dev_leads for insert to anon, authenticated with check (status = 'baru');
+drop policy if exists "admin kelola lead" on public.dev_leads;
 create policy "admin kelola lead" on public.dev_leads for all to authenticated using (public.dev_is_admin()) with check (public.dev_is_admin());
 
 -- storage --------------------------------------------------------------
 insert into storage.buckets (id, name, public) values ('dev-media', 'dev-media', true) on conflict (id) do nothing;
+drop policy if exists "dev media publik baca" on storage.objects;
 create policy "dev media publik baca" on storage.objects for select using (bucket_id = 'dev-media');
+drop policy if exists "dev media admin tulis" on storage.objects;
 create policy "dev media admin tulis" on storage.objects for insert to authenticated with check (bucket_id = 'dev-media' and public.dev_is_admin());
+drop policy if exists "dev media admin ubah" on storage.objects;
 create policy "dev media admin ubah" on storage.objects for update to authenticated using (bucket_id = 'dev-media' and public.dev_is_admin());
+drop policy if exists "dev media admin hapus" on storage.objects;
 create policy "dev media admin hapus" on storage.objects for delete to authenticated using (bucket_id = 'dev-media' and public.dev_is_admin());
