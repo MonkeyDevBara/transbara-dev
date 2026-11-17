@@ -1,7 +1,7 @@
 # Setup Admin CMS (Supabase)
 
 1. Buat project di https://supabase.com.
-2. SQL Editor: jalankan `supabase/migrations/001_init.sql`, lalu `supabase/seed.sql` (isi awal situs).
+2. SQL Editor: jalankan berurutan `supabase/migrations/001_init.sql`, `supabase/migrations/002_grants.sql`, lalu `supabase/seed.sql` (isi awal situs).
 3. Authentication > Users > Add user (email + password) untuk akun admin. Matikan "Allow new users to sign up" di Authentication > Sign In / Providers.
 4. Jadikan akun itu admin (SQL Editor):
    ```sql
