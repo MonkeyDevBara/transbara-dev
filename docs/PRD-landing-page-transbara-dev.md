@@ -3,11 +3,13 @@
 | Item | Detail |
 |---|---|
 | Produk | Website company/landing page Transbara Dev |
-| Versi dokumen | 1.0 — 17 Nov 2026 |
+| Versi dokumen | 1.1 — 17 Nov 2026 (data owner §11 masuk) |
 | Status | Draft, menunggu approval |
 | Bahasa situs | Bahasa Indonesia (utama), English (fase 2) |
 | Tagline / visi | **Deliver the Happiness** |
-| Lokasi | Malang, Jawa Timur, Indonesia (melayani seluruh Indonesia, remote) |
+| Domain | `https://dev.transbara.my.id/` |
+| Lokasi | Jl. Bandulan 6/K2 No.64, Kec. Sukun, Kota Malang, Jawa Timur (melayani seluruh Indonesia, remote) |
+| Kontak | WhatsApp/Telp 0821-1958-9966 · transbaradev@gmail.com · buka 24 jam |
 
 ---
 
@@ -16,7 +18,7 @@
 Transbara Dev adalah software house asal Malang yang membangun **website, aplikasi (web & mobile), dan solusi AI custom** untuk bisnis dari UMKM sampai korporasi. Rekam jejak: **7+ tahun**, **puluhan proyek besar** terdeliver, kepuasan client tinggi. Pembeda utama: **servis & kepuasan pelanggan**, solusi **100% custom** sesuai kebutuhan, dan **konsultasi gratis**.
 
 Masalah yang diselesaikan landing page:
-1. Calon client belum kenal Transbara Dev → butuh **bukti nyata** (portofolio, angka, testimoni, logo mitra), bukan klaim.
+1. Calon client belum kenal Transbara Dev → butuh **bukti nyata** (portofolio, angka, testimoni, penghargaan), bukan klaim.
 2. Calon client ragu soal biaya, proses, dan risiko proyek gagal → butuh **transparansi proses, garansi, dan FAQ**.
 3. Calon client mencari via Google ("jasa pembuatan aplikasi Malang", "jasa ERP", dll.) → situs harus **mudah diindeks dan ranking**.
 
@@ -51,7 +53,7 @@ Masalah yang diselesaikan landing page:
 |---|---|---|---|
 | **Owner UMKM** | Pemilik toko, kuliner, klinik, kursus, 25–45 th | Budget terbatas, takut ditipu vendor, gaptek | Harga mulai dari, contoh hasil, WA cepat respon, bahasa sederhana |
 | **Manajer/Direktur perusahaan menengah** | Ops/IT manager, HR, Finance | Proses manual Excel, data tercecer, butuh ERP/CRM | Studi kasus berangka, proses kerja jelas, garansi & maintenance |
-| **Korporasi / Institusi** | Head of IT, procurement, yayasan pendidikan | Vendor tidak scalable, keamanan data, legalitas | Kapabilitas teknis, keamanan, SLA, NDA, legalitas perusahaan, logo mitra |
+| **Korporasi / Institusi** | Head of IT, procurement, yayasan pendidikan | Vendor tidak scalable, keamanan data | Kapabilitas teknis, keamanan, SLA, NDA, studi kasus |
 | **Founder startup / Gen Z entrepreneur** | 20–30 th | Butuh MVP cepat, AI-powered | Kecepatan, stack modern, AI, vibe brand yang relate |
 
 ## 4. Value Proposition & Pesan Utama
@@ -87,7 +89,7 @@ Elemen kunci:
 - **Bento grid** untuk layanan & keunggulan.
 - **Manga panel / speech bubble** untuk testimoni.
 - **Sticker & badge** miring (rotasi -3° s/d 4°) — "Konsultasi GRATIS!", "7+ Tahun", "Made in Malang".
-- **Marquee** teks berjalan (kategori layanan, logo mitra).
+- **Marquee** teks berjalan (kategori layanan, sticker keunggulan).
 - **Efek asap ungu** (SVG/Lottie ringan) sebagai divider antar section.
 - Outline tebal hitam-ungu (2–3px) seperti line-art logo; drop shadow keras (offset 4–6px, tanpa blur).
 - Micro-interaction: hover tilt kartu, tombol "squish", cursor glow ungu (desktop).
@@ -153,12 +155,13 @@ Landing page `/` adalah halaman konversi utama; halaman `/layanan/*` adalah hala
   - Primary: **"Konsultasi Gratis via WhatsApp"** (pesan pre-filled).
   - Secondary: **"Lihat Hasil Kerja Kami"** → scroll ke Portofolio.
 - Visual: logomark devil fruit 3D/ilustrasi dengan asap animasi + floating mockup layar aplikasi (dashboard ERP, app mobile, chat AI).
-- Trust bar di bawah CTA: "⭐ 7+ Tahun · 50+ Proyek · 100+ Institusi Pengguna · Konsultasi Gratis" (angka final dari §11).
+- Trust bar di bawah CTA: "⭐ 7+ Tahun · Puluhan Proyek Besar · 100+ Sekolah Pengguna · Garansi 1 Tahun · Konsultasi Gratis". Tidak memakai angka proyek/client yang spesifik (owner tidak menyediakan angka final).
 - Hero image adalah **LCP element**: wajib di-preload, WebP/AVIF, tanpa animasi yang menunda render.
 
-### 6.3 Social Proof Bar — "Dipercaya oleh"
-- Marquee logo client & partner (grayscale → warna saat hover).
-- Sumber awal dari portofolio (transbara.my.id): 30 sekolah mitra, partner seperti Bank Muamalat, BSI, BCA, BNI, Winpay, ZKTeco, Next Edu. **Wajib konfirmasi izin penggunaan logo** sebelum tayang (§11).
+### 6.3 Highlight Bar — "Kenapa banyak yang balik lagi"
+- **Tanpa logo client/partner** (keputusan owner).
+- Marquee teks kategori layanan (Landing Page · LMS · ERP · CRM · Mobile App · AI Chatbot · …) diselingi sticker "Konsultasi Gratis", "Garansi 1 Tahun", "Made in Malang".
+- Badge penghargaan produk: 1st Winner Indigo Betalist; Top 10 Startup Hetero for Startup, Techibition, F+, Hatch by 1000 Startup Digital.
 
 ### 6.4 Problem → Solution ("Masih begini?")
 - 3–4 kartu pain point relatable dengan gaya meme/sticker: "Data masih di Excel beda-beda versi", "Admin lembur rekap manual", "Customer chat nggak kebales", "Web jadul, nggak muncul di Google".
@@ -190,24 +193,29 @@ Bento grid 6 poin:
 2. **100% custom** — mengikuti alur bisnismu.
 3. **Konsultasi & proposal gratis** — tanpa kewajiban order.
 4. **Servis excellent** — respon cepat, satu PIC, update progres rutin.
-5. **Garansi & after-sales** — bug fixing gratis selama masa garansi (durasi: §11).
+5. **Garansi 1 tahun & after-sales** — bug fixing gratis selama 1 tahun setelah launch.
 6. **Tech modern & aman** — scalable, siap integrasi AI.
 
-Plus **counter animasi** (angka naik saat masuk viewport): Tahun pengalaman, Proyek selesai, Institusi/pengguna aktif, Rating kepuasan.
+Plus **counter animasi** (angka naik saat masuk viewport): **7+** Tahun pengalaman · **100+** Sekolah pengguna sistem kami · **12** Kategori layanan · **1 Tahun** Garansi. Tidak ada counter "jumlah proyek" atau "rating kepuasan" sampai owner punya angka pasti.
 
 ### 6.7 Portofolio / Hasil Nyata (section terpenting)
 - Filter tab: Semua · Web Platform · Mobile App · AI · Sistem Bisnis.
 - Kartu: thumbnail mockup, nama proyek, kategori, **1 metrik hasil** (mis. "dipakai 100+ sekolah"), tombol "Kunjungi Live" (jika publik) & "Studi Kasus".
-- Konten awal (dari transbara.my.id, ditampilkan sebagai karya, **tanpa narasi founder**):
-  - Ekosistem aplikasi sekolah terintegrasi: Aplikasi Murid, Wali Murid, Guru, CBT, School Management System, LMS + 8 modul (Yayasan, HRD, BK, Klinik, Sarpra, Perpustakaan, Kantin, Pesantren) — dipakai **100+ sekolah**.
-  - Marboot (manajemen masjid), NS Daily (ibadah harian), Money Bos (keuangan pribadi), Ngajio (tahfidz & tahsin), Dietsis (diet tracker).
-  - Prestasi produk: 1st Winner Indigo Betalist; Top 10 Startup Hetero for Startup, Techibition, F+, Hatch by 1000 Startup Digital — tampil sebagai **badge penghargaan**.
+- **Konten v1: data dummy** yang nanti diedit sendiri oleh owner. Developer menyiapkan 6 entri dummy di `src/content/portfolio/*.md` (1 file = 1 proyek) yang mencakup tiap filter, contoh:
+  - "ERP Distributor Sembako" (Sistem Bisnis) — "waktu rekap stok turun 80%"
+  - "LMS Pelatihan Karyawan" (Web Platform) — "1.200 karyawan aktif"
+  - "CRM Klinik Kecantikan" (Sistem Bisnis) — "repeat order naik 35%"
+  - "Aplikasi Kasir Coffee Shop" (Mobile App) — "transaksi 2x lebih cepat"
+  - "AI Chatbot WhatsApp Toko Online" (AI) — "70% chat terjawab otomatis"
+  - "Landing Page Properti" (Web Platform) — "leads naik 3x"
+- Field tiap entri: `title`, `slug`, `category`, `client`, `metric`, `thumbnail`, `liveUrl?`, `challenge`, `solution`, `features[]`, `results[]`, `dummy: true`.
+- Referensi karya nyata yang bisa owner pakai untuk mengganti dummy (dari transbara.my.id, **tanpa narasi founder**): ekosistem aplikasi sekolah (Murid, Wali Murid, Guru, CBT, SMS, LMS + 8 modul) yang dipakai 100+ sekolah; Marboot, NS Daily, Money Bos, Ngajio, Dietsis.
 - Halaman `/portofolio/[slug]` format studi kasus: Tantangan → Solusi → Fitur → Hasil (angka) → Testimoni → CTA.
 
 ### 6.8 Paket & Estimasi Harga
-- Tabel 3 tier kartu (contoh struktur; angka final dari owner):
-  - **Starter** (UMKM): Landing page / company profile — "mulai dari Rp X".
-  - **Growth** (bisnis berkembang): Web app / LMS / CRM — "mulai dari Rp Y".
+- 3 tier kartu (harga dari owner):
+  - **Starter** (UMKM): Landing page / company profile — **mulai dari Rp500.000**.
+  - **Growth** (bisnis berkembang): Web app / LMS / CRM / aplikasi mobile — **mulai dari Rp5.000.000**.
   - **Enterprise** (korporasi): ERP / sistem terintegrasi / AI — "Custom quote".
 - Semua kartu CTA "Konsultasi Gratis". Tier tengah diberi sticker "Paling Laris".
 - Opsional fase 2: **kalkulator estimasi** (pilih jenis, fitur, platform → range harga → kirim ke WA).
@@ -223,12 +231,13 @@ Plus **counter animasi** (angka naik saat masuk viewport): Tahun pengalaman, Pro
 Tiap step: ikon, durasi indikatif, output yang client terima. Visual: jalur berliku dengan asap/"jejak" devil fruit.
 
 ### 6.10 Testimoni
-- Format manga speech bubble/carousel: foto/logo client, nama, jabatan, institusi, rating bintang, kutipan berisi **hasil konkret**.
-- Prioritas video testimoni pendek (≤ 60 dtk, lazy-load, poster image) jika tersedia.
-- Wajib **testimoni asli dengan izin**; tidak boleh testimoni fiktif.
+- Format manga speech bubble/carousel: avatar/logo, nama, jabatan, institusi, rating bintang, kutipan berisi **hasil konkret**.
+- **Konten v1: 6 testimoni dummy** di `src/content/testimonials/*.md` (field: `name`, `role`, `company`, `avatar`, `rating`, `quote`, `project`, `dummy: true`), owner mengedit sendiri.
+- Avatar dummy pakai ilustrasi/inisial, **bukan foto orang asli dari stock** (supaya tidak terlihat seperti testimoni palsu).
+- Video testimoni: fase 2, jika owner punya.
 
 ### 6.11 Garansi / Risk Reversal
-Banner: "Konsultasi gratis. Proposal gratis. Revisi desain sampai cocok. Garansi bug." + NDA tersedia untuk korporasi.
+Banner: "Konsultasi gratis. Proposal gratis. Revisi desain sampai cocok. **Garansi bug 1 tahun.**" + NDA tersedia untuk korporasi.
 
 ### 6.12 FAQ (accordion, + schema FAQPage)
 Minimal 10 pertanyaan, contoh:
@@ -249,11 +258,12 @@ Konten FAQ harus dirender di HTML (bukan dimuat via JS) agar terbaca crawler.
 - Headline: "Siap Deliver Happiness ke Bisnismu?"
 - Form (≤ 6 field agar conversion tinggi): Nama*, No. WhatsApp*, Nama Bisnis/Perusahaan, Jenis kebutuhan* (dropdown kategori §6.5), Range budget (dropdown), Ceritakan kebutuhanmu.
 - Validasi client + server, honeypot + rate-limit (anti-spam, tanpa CAPTCHA yang mengganggu; Cloudflare Turnstile jika spam tinggi).
-- Submit → kirim ke email owner + simpan ke spreadsheet/DB + redirect ke `/konsultasi/terima-kasih/` (untuk tracking konversi) yang menawarkan lanjut chat WA.
+- Submit → kirim ke **transbaradev@gmail.com** + simpan ke Google Sheets/DB + redirect ke `/konsultasi/terima-kasih/` (untuk tracking konversi) yang menawarkan lanjut chat WA ke 0821-1958-9966.
 - Alternatif: tombol WhatsApp langsung & email.
 
 ### 6.14 Footer
-- Logo, tagline "Deliver the Happiness", alamat Malang (NAP konsisten dengan Google Business Profile), jam operasional, email, WhatsApp, sosial media (Instagram, LinkedIn, TikTok).
+- Logo, tagline "Deliver the Happiness", alamat Jl. Bandulan 6/K2 No.64, Kec. Sukun, Kota Malang (NAP identik dengan Google Business Profile), "Buka 24 jam", email transbaradev@gmail.com, WhatsApp 0821-1958-9966.
+- Tidak ada ikon sosial media (belum ada akun).
 - Link layanan (internal linking SEO), portofolio, kebijakan privasi.
 - Embed peta ringan (static map image link ke Google Maps, bukan iframe berat).
 
@@ -308,13 +318,13 @@ Konten FAQ harus dirender di HTML (bukan dimuat via JS) agar terbaca crawler.
 Setiap halaman layanan: ≥ 800 kata konten unik (masalah, solusi, fitur, contoh proyek, proses, harga mulai dari, FAQ khusus), bukan duplikasi antarhalaman.
 
 ### 8.3 Structured data (JSON-LD)
-- `Organization` + `ProfessionalService`/`LocalBusiness` (nama, logo, alamat Malang, geo, telepon, jam buka, `areaServed: Indonesia`, `sameAs` sosial media).
+- `Organization` + `ProfessionalService` (nama "Transbara Dev", `url` https://dev.transbara.my.id/, logo, `address` Jl. Bandulan 6/K2 No.64, Sukun, Malang, Jawa Timur, ID; `telephone` +62-821-1958-9966; `email` transbaradev@gmail.com; `openingHoursSpecification` Senin–Minggu 00:00–23:59; `areaServed: Indonesia`; `priceRange` "Rp500.000+"). Tanpa `sameAs` sampai ada akun sosial media.
 - `WebSite` di beranda.
 - `Service` per halaman layanan (`provider`, `areaServed`, `offers` mulai dari).
 - `FAQPage` di beranda & halaman layanan.
 - `BreadcrumbList` di halaman turunan.
 - `CreativeWork`/`Article` untuk studi kasus.
-- `Review`/`AggregateRating` **hanya jika** review asli dan ditampilkan di halaman (kepatuhan guideline Google; jangan self-serving rating palsu).
+- `Review`/`AggregateRating`: **tidak dipasang** selama testimoni masih dummy (melanggar guideline Google, risiko manual action). Aktifkan hanya setelah testimoni asli.
 - Validasi dengan Rich Results Test sebelum launch.
 
 ### 8.4 SEO lokal
@@ -339,26 +349,28 @@ Blog `/blog/` dengan artikel edukasi long-tail ("Berapa biaya membuat aplikasi E
 - Hosting: **Cloudflare Pages** atau Vercel (CDN edge, HTTPS otomatis).
 - Konten: Markdown/MDX collections (fase 1), headless CMS opsional (fase 2).
 
-## 11. Data yang Dibutuhkan dari Owner (blocking sebelum launch)
+## 11. Data dari Owner
 
-| # | Data | Kenapa |
+| # | Data | Status / Nilai |
 |---|---|---|
-| 1 | **Domain final** (mis. transbara.dev / transbaradev.id) | Canonical, sitemap, GBP |
-| 2 | Nomor WhatsApp bisnis, email, alamat lengkap Malang, jam operasional | CTA, NAP, schema |
-| 3 | **Angka final**: jumlah proyek, client, pengguna aktif, rating kepuasan | Counter & trust bar harus akurat |
-| 4 | Daftar proyek yang **boleh** ditampilkan + screenshot + metrik hasil | Portofolio |
-| 5 | **Izin pakai logo** client/partner (terutama bank: BCA, BNI, BSI, Muamalat) | Risiko legal/merek |
-| 6 | 3–6 testimoni asli (nama, jabatan, institusi, foto/logo, izin) | Social proof |
-| 7 | Harga "mulai dari" per tier & skema termin | Section harga, FAQ |
-| 8 | Durasi garansi & cakupan maintenance | Section garansi, FAQ |
-| 9 | Akun sosial media Transbara Dev | Footer, `sameAs` |
-| 10 | Legalitas (CV/PT, NIB) jika ingin ditampilkan | Kepercayaan korporat |
+| 1 | Domain | ✅ `dev.transbara.my.id` |
+| 2 | Kontak | ✅ WA 0821-1958-9966 (`https://wa.me/6282119589966`), Jl. Bandulan 6/K2 No.64 Kec. Sukun Kota Malang, transbaradev@gmail.com, buka 24 jam |
+| 3 | Angka statistik | ⏭️ Skip — pakai "7+ tahun", "puluhan proyek", "100+ sekolah" saja |
+| 4 | Portofolio | 🧪 Dummy (§6.7), diedit owner |
+| 5 | Logo partner | ⏭️ Skip — section logo dihapus (§6.3) |
+| 6 | Testimoni | 🧪 Dummy (§6.10), diedit owner |
+| 7 | Harga | ✅ Starter mulai Rp500rb · Growth mulai Rp5 juta · Enterprise custom |
+| 8 | Garansi | ✅ 1 tahun |
+| 9 | Sosial media | ❌ Belum ada — tidak ditampilkan |
+| 10 | Legalitas | ❌ Tidak ditampilkan |
+
+Domain adalah subdomain: daftarkan **properti terpisah** `dev.transbara.my.id` di Google Search Console, dan pasang link dari transbara.my.id ke dev.transbara.my.id untuk mempercepat indexing.
 
 ## 12. Rilis & Milestone
 
 | Fase | Isi | Estimasi |
 |---|---|---|
-| 0. Persiapan | Kumpulkan data §11, vector logo, copywriting final | 1 minggu |
+| 0. Persiapan | Vector logo transparan, copywriting final, isi data dummy | 3–5 hari |
 | 1. Desain | Wireframe → hi-fi Figma (mobile & desktop, dark & light) | 1–2 minggu |
 | 2. Build v1 | Landing `/`, 10 halaman layanan, 3+ studi kasus, form, SEO teknis, analitik | 2–3 minggu |
 | 3. QA & Launch | Lighthouse, Rich Results Test, cross-browser, submit GSC, GBP | 3–5 hari |
@@ -373,5 +385,5 @@ Blog `/blog/` dengan artikel edukasi long-tail ("Berapa biaya membuat aplikasi E
 - [ ] `sitemap.xml` & `robots.txt` valid, tersubmit di Search Console.
 - [ ] Form konsultasi: data masuk ke email & penyimpanan, redirect ke halaman terima kasih, event GA4 tercatat.
 - [ ] Semua tombol WhatsApp membuka chat dengan pesan pre-filled yang sesuai halaman asal.
-- [ ] Semua angka, logo, dan testimoni sudah dikonfirmasi owner (§11).
+- [ ] Semua entri dengan `dummy: true` terdaftar di README; build menampilkan warning jumlah entri dummy yang masih tayang.
 - [ ] `prefers-reduced-motion` dan navigasi keyboard berfungsi.
