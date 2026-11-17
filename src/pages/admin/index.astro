@@ -1,0 +1,36 @@
+---
+import '../../styles/global.css';
+export const prerender = true;
+---
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin | Transbara Dev</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style is:global>
+    body::before { display:none; }
+    .a-btn { display:inline-flex; align-items:center; gap:.4rem; font-weight:700; font-size:.85rem; padding:.45rem .9rem; border-radius:.6rem; border:2px solid #4c1d95; background:transparent; color:inherit; cursor:pointer; }
+    .a-btn:hover { border-color:#c084fc; box-shadow:0 0 12px rgba(168,85,247,.6); }
+    .a-pri { background:#facc15; color:#0f0a1a; border-color:#0f0a1a; } .a-pri:hover { box-shadow:0 0 14px #facc15; border-color:#0f0a1a; }
+    .a-del { border-color:#7f1d1d; color:#fca5a5; } .a-del:hover { border-color:#f87171; box-shadow:0 0 12px rgba(248,113,113,.5); }
+    .a-nav { display:flex; width:100%; text-align:left; padding:.55rem .8rem; border-radius:.6rem; font-weight:700; font-size:.9rem; cursor:pointer; }
+    .a-nav:hover { background:rgba(124,58,237,.25); } .a-nav.on { background:#7c3aed; color:#fff; }
+    .a-tbl { width:100%; border-collapse:collapse; font-size:.875rem; } .a-tbl th { text-align:left; font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; opacity:.7; padding:.5rem .6rem; }
+    .a-tbl td { padding:.6rem; border-top:1px solid rgba(124,58,237,.3); vertical-align:top; }
+    .a-lbl { display:grid; gap:.3rem; font-size:.8rem; font-weight:700; } .a-lbl .field { border-width:2px; border-color:#4c1d95; padding:.55rem .75rem; font-weight:400; }
+    dialog { background:#241040; color:#f5f3ff; border:3px solid #7c3aed; border-radius:1rem; padding:0; width:min(640px,94vw); max-height:90vh; }
+    dialog::backdrop { background:rgba(10,4,20,.8); }
+    .pill { display:inline-block; font-size:.7rem; font-weight:800; padding:.1rem .5rem; border-radius:99px; border:1.5px solid currentColor; }
+    #main .card.overflow-x-auto:hover, #main details:hover { transform:none; box-shadow:6px 6px 0 var(--shadow); border-color:var(--line); }
+    #toast { position:fixed; bottom:1.2rem; left:50%; transform:translateX(-50%); z-index:99; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div id="app" class="min-h-screen grid place-items-center text-sm muted">Memuat…</div>
+  <div id="toast"></div>
+  <script>import '../../admin/app.ts';</script>
+</body>
+</html>

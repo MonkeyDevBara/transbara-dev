@@ -1,1 +1,1 @@
-{"name":"transbara-dev","type":"module","private":true,"version":"0.1.0","scripts":{"dev":"astro dev","build":"astro build","preview":"astro preview"},"dependencies":{"@tailwindcss/vite":"^4.3.5","astro":"^7.4.12","tailwindcss":"^4.3.5"}}
+{"name":"transbara-dev","type":"module","private":true,"version":"0.1.0","scripts":{"dev":"astro dev","build":"astro build","preview":"astro preview"},"dependencies":{"@astrojs/node":"^11.1.13","@supabase/supabase-js":"^2.119.0","@tailwindcss/vite":"^4.3.5","astro":"^7.4.12","tailwindcss":"^4.3.5"}}

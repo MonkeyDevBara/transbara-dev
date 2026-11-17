@@ -2,19 +2,18 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Mock from '../components/Mock.astro';
-import { site, waLink, services, portfolio, testimonials, process, faqs } from '../data/site';
-const cats = ['Semua', ...new Set(portfolio.map(p => p.cat))];
+import { loadContent, waLink as wl } from '../lib/content';
+const c = await loadContent();
+const { contact, hero, stats, awards } = c.settings;
+const services = c.services, portfolio = c.portfolio_items, testimonials = c.testimonials, steps = c.process_steps, faqs = c.faqs, tiers = c.pricing_tiers;
+const waLink = (m?: string) => wl(contact.wa, m);
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
+const cats = ['Semua', ...new Set(portfolio.map(p => p.category))];
 const marq = ['Landing Page','LMS','ERP','CRM','Mobile App','AI Chatbot','Kasir/POS','HRIS','E-Commerce','Integrasi API'];
-const awards = ['1st Winner Indigo Betalist','Top 10 Hetero for Startup','Top 10 Techibition','Top 10 F+','Top 10 Hatch by 1000 Startup Digital'];
 const pains = [['file','Data tercecer di Excel, versinya beda-beda','Satu sistem terpusat. Semua tim lihat angka yang sama.'],['clock','Admin lembur rekap manual tiap akhir bulan','Laporan jadi sendiri, tim fokus ke kerjaan yang penting.'],['chat','Chat pelanggan telat dibalas, order lari','Chatbot jawab 24 jam dan oper ke manusia kalau perlu.'],['snail','Website lambat dan tidak muncul di Google','Web cepat, rapi untuk SEO, gampang ditemukan.']];
 const keunggulan = [['puzzle','100% custom','Dibuat dari alur kerja bisnismu, bukan template jadi.'],['gift','Konsultasi dan proposal gratis','Tanpa kewajiban order.'],['bolt','Respon cepat','Satu PIC, progres dilaporkan rutin, kontak buka 24 jam.'],['shield','Garansi bug 1 tahun','Setelah launch, perbaikan bug tanpa biaya.'],['lock','Aman dan siap berkembang','Arsitektur rapi, siap tambah fitur dan integrasi AI.'],['trophy','Produk berprestasi','Produk kami pernah juara dan masuk Top 10 kompetisi startup.']];
-const tiers = [
-  ['Starter','UMKM','Rp500rb','Landing page / company profile',['Desain custom responsif','SEO dasar','Tombol WhatsApp','Garansi bug 1 tahun'],false],
-  ['Growth','Bisnis berkembang','Rp5 juta','Web app, LMS, CRM, aplikasi mobile',['Fitur sesuai alur bisnis','Dashboard admin','Integrasi payment / WhatsApp','Garansi bug 1 tahun'],true],
-  ['Enterprise','Korporasi','Custom','ERP, sistem terintegrasi, AI',['Analisis kebutuhan mendalam','Integrasi sistem lama','NDA tersedia','Garansi bug 1 tahun'],false],
-];
 ---
-<Base>
+<Base faqs={faqs} services={services} contact={contact}>
 <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all">
   <div class="wrap flex items-center justify-between py-3">
     <a href="/" aria-label="Transbara Dev beranda"><img src="/img/logo.webp" alt="Transbara Dev" width="150" height="100" class="h-12 w-auto" /></a>
@@ -39,15 +38,15 @@ const tiers = [
   <div class="smoke w-96 h-96 bg-grape-500 -top-10 -left-20"></div>
   <div class="wrap grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-center relative">
     <div>
-      <span class="sticker font-hand !text-lg tracking-wide">Konsultasi gratis, tanpa syarat</span>
-      <h1 class="text-5xl sm:text-6xl lg:text-[4.6rem] font-extrabold leading-[1] mt-5">Bisnismu butuh <span class="hl squig">aplikasi</span> yang bikin ia berlayar lebih jauh.</h1>
-      <p class="muted text-lg mt-6 max-w-xl">Kami software house di Malang. Bikin website, aplikasi, dan AI custom untuk usaha kecil sampai perusahaan besar. Sudah 7 tahun lebih dan puluhan proyek besar selesai dengan client yang puas.</p>
+      <span class="sticker font-hand !text-lg tracking-wide">{hero.badge}</span>
+      <h1 class="text-5xl sm:text-6xl lg:text-[4.6rem] font-extrabold leading-[1] mt-5">{hero.before} <span class="hl squig">{hero.highlight}</span> {hero.after}</h1>
+      <p class="muted text-lg mt-6 max-w-xl">{hero.subtitle}</p>
       <div class="flex flex-wrap gap-4 mt-8">
         <a href={waLink()} class="btn btn-gold text-lg"><Icon n="chat" class="w-5 h-5" /> Chat via WhatsApp</a>
         <a href="#portofolio" class="btn btn-ghost text-lg">Lihat hasil kerja</a>
       </div>
       <dl class="flex flex-wrap gap-x-8 gap-y-3 mt-10">
-        {[['7+','tahun'],['Puluhan','proyek besar'],['100+','sekolah pengguna'],['1 th','garansi bug']].map(([a,b]) => <div><dt class="font-hand text-3xl hl leading-none">{a}</dt><dd class="text-xs font-bold muted uppercase tracking-wider">{b}</dd></div>)}
+        {stats.map(x => <div><dt class="font-hand text-3xl hl leading-none">{x.value}</dt><dd class="text-xs font-bold muted uppercase tracking-wider">{x.label}</dd></div>)}
       </dl>
     </div>
     <div class="relative flex justify-center lg:justify-end">
@@ -81,11 +80,11 @@ const tiers = [
     <h2 class="h2 mt-2 max-w-3xl">Satu tim untuk <span class="hl">semua</span> kebutuhan digital bisnismu.</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 auto-rows-fr">
       {services.map(s => (
-        <article class={`card p-6 reveal ${s.big ? 'lg:col-span-2' : ''}`}>
+        <article class={`card p-6 reveal ${s.featured ? 'lg:col-span-2' : ''}`}>
           <Icon n={s.icon} class="ico w-9 h-9 text-gold-400" />
           <h3 class="font-extrabold text-xl mt-4">{s.title}</h3>
-          <p class="muted mt-2 text-sm">{s.desc}</p>
-          <span class="inline-block mt-4 text-xs font-bold border-2 border-current rounded-full px-3 py-1 muted">Cocok: {s.tag}</span>
+          <p class="muted mt-2 text-sm">{s.description}</p>
+          <span class="inline-block mt-4 text-xs font-bold border-2 border-current rounded-full px-3 py-1 muted">Cocok: {s.audience}</span>
         </article>))}
       <a href={waLink('Halo Transbara Dev, saya butuh aplikasi custom yang tidak ada di daftar layanan.')} class="card p-6 flex flex-col justify-center lg:col-span-2" style="background:var(--color-gold-400);color:var(--color-ink)">
         <Icon n="spark" class="ico w-9 h-9" /><h3 class="font-hand text-4xl mt-2 tracking-wide">Nggak ada yang cocok?</h3><p class="font-bold mt-1">Ceritakan idenya, kami rancang dari nol. Ngobrol dulu, gratis.</p>
@@ -115,8 +114,8 @@ const tiers = [
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
       {portfolio.map(p => (
-        <article class="card pf overflow-hidden" data-cat={p.cat}>
-          <div class="aspect-[16/9] bg-[#f6ecd0] border-b-[3px] border-ink p-2"><Mock kind={p.kind} /></div>
+        <article class="card pf overflow-hidden" data-cat={p.category}>
+          <div class="aspect-[16/9] bg-[#f6ecd0] border-b-[3px] border-ink p-2">{p.image_url ? <img src={p.image_url} alt={p.title} loading="lazy" class="w-full h-full object-cover" /> : <Mock kind={p.mock_kind} />}</div>
           <div class="p-5">
             <p class="text-xs font-bold uppercase tracking-wider muted">{p.cat}</p>
             <h3 class="font-extrabold text-lg mt-1">{p.title}</h3>
@@ -133,15 +132,15 @@ const tiers = [
     <p class="eyebrow">Paket</p>
     <h2 class="h2 mt-2 max-w-3xl">Mulai dari yang <span class="hl">pas</span> di kantongmu.</h2>
     <div class="grid md:grid-cols-3 gap-7 mt-12 items-stretch">
-      {tiers.map(([n,w,p,d,f,hot]) => (
-        <div class={`card p-7 relative reveal flex flex-col ${hot ? 'md:-translate-y-5' : ''}`} style={hot ? 'border-color:var(--color-gold-400)' : ''}>
-          {hot && <span class="sticker font-hand !text-lg absolute -top-4 right-5">Paling laris</span>}
-          <p class="eyebrow">{w}</p><h3 class="font-hand text-5xl tracking-wide">{n}</h3>
-          <p class="mt-3 muted text-sm">{p === 'Custom' ? 'Harga' : 'Mulai dari'}</p>
-          <p class="font-display text-4xl font-extrabold hl">{p === 'Custom' ? 'Custom quote' : p}</p>
-          <p class="mt-2 text-sm font-bold">{d}</p>
-          <ul class="mt-5 grid gap-2 text-sm grow">{f.map(x => <li class="flex gap-2"><Icon n="check" class="w-4 h-4 mt-0.5 text-gold-400 shrink-0" />{x}</li>)}</ul>
-          <a href={waLink(`Halo Transbara Dev, saya tertarik paket ${n}.`)} class="btn btn-gold w-full mt-6">Konsultasi gratis</a>
+      {tiers.map(t => (
+        <div class={`card p-7 relative reveal flex flex-col ${t.highlighted ? 'md:-translate-y-5' : ''}`} style={t.highlighted ? 'border-color:var(--color-gold-400)' : ''}>
+          {t.highlighted && <span class="sticker font-hand !text-lg absolute -top-4 right-5">Paling laris</span>}
+          <p class="eyebrow">{t.audience}</p><h3 class="font-hand text-5xl tracking-wide">{t.name}</h3>
+          <p class="mt-3 muted text-sm">{t.price_prefix}</p>
+          <p class="font-display text-4xl font-extrabold hl">{t.price_label}</p>
+          <p class="mt-2 text-sm font-bold">{t.description}</p>
+          <ul class="mt-5 grid gap-2 text-sm grow">{t.features.map(x => <li class="flex gap-2"><Icon n="check" class="w-4 h-4 mt-0.5 text-gold-400 shrink-0" />{x}</li>)}</ul>
+          <a href={waLink(`Halo Transbara Dev, saya tertarik paket ${t.name}.`)} class="btn btn-gold w-full mt-6">Konsultasi gratis</a>
         </div>))}
     </div>
   </div>
@@ -152,11 +151,11 @@ const tiers = [
     <p class="eyebrow">Proses kerja</p>
     <h2 class="h2 mt-2 max-w-3xl">Rute pelayarannya <span class="hl">jelas</span> dari awal.</h2>
     <ol class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 mt-12">
-      {process.map(([t,d,o],i) => (
+      {steps.map((st,i) => (
         <li class="card p-6 reveal relative">
           <span class="absolute -top-5 -left-3 w-12 h-12 rounded-full bg-gold-400 text-ink border-[3px] border-ink grid place-items-center font-hand text-2xl" style="box-shadow:3px 3px 0 var(--line)">{i+1}</span>
-          <h3 class="font-extrabold text-xl mt-3">{t}</h3><p class="muted mt-2 text-sm">{d}</p>
-          <p class="mt-4 text-xs font-bold uppercase tracking-wider text-gold-400">Hasil: {o}</p>
+          <h3 class="font-extrabold text-xl mt-3">{st.title}</h3><p class="muted mt-2 text-sm">{st.description}</p>
+          <p class="mt-4 text-xs font-bold uppercase tracking-wider text-gold-400">Hasil: {st.output}</p>
         </li>))}
     </ol>
   </div>
@@ -170,12 +169,12 @@ const tiers = [
       {testimonials.map(t => (
         <figure class="reveal">
           <div class="bubble">
-            <div class="flex gap-0.5 text-[#d97706]" aria-label={`${t.s} dari 5 bintang`}>{Array.from({length:t.s}).map(() => <Icon n="star" fill class="w-4 h-4" />)}</div>
-            <blockquote class="mt-3 font-bold">{t.q}</blockquote>
+            <div class="flex gap-0.5 text-[#d97706]" aria-label={`${t.rating} dari 5 bintang`}>{Array.from({length:t.rating}).map(() => <Icon n="star" fill class="w-4 h-4" />)}</div>
+            <blockquote class="mt-3 font-bold">{t.quote}</blockquote>
           </div>
           <figcaption class="mt-7 ml-3 flex items-center gap-3">
             <span class="w-11 h-11 rounded-full bg-grape-500 text-white font-hand text-2xl grid place-items-center border-2 border-ink">{t.name[0]}</span>
-            <span class="text-sm"><b>{t.name}</b><br><span class="muted">{t.role}, {t.co}</span></span>
+            <span class="text-sm"><b>{t.name}</b><br><span class="muted">{t.role}, {t.company}</span></span>
           </figcaption>
         </figure>))}
     </div>
@@ -188,8 +187,8 @@ const tiers = [
     <p class="eyebrow">FAQ</p>
     <h2 class="h2 mt-2">Biar nggak <span class="hl">ragu</span>.</h2>
     <div class="grid gap-4 mt-8">
-      {faqs.map(([q,a]) => (
-        <details class="card p-5"><summary class="font-extrabold flex justify-between items-center gap-4">{q}<Icon n="plus" class="plus w-5 h-5 shrink-0" /></summary><p class="muted mt-3">{a}</p></details>))}
+      {faqs.map(f => (
+        <details class="card p-5"><summary class="font-extrabold flex justify-between items-center gap-4">{f.question}<Icon n="plus" class="plus w-5 h-5 shrink-0" /></summary><p class="muted mt-3">{f.answer}</p></details>))}
     </div>
   </div>
 </section>
@@ -201,10 +200,10 @@ const tiers = [
       <h2 class="h2 mt-4">Siap <span class="hl">deliver happiness</span> ke bisnismu?</h2>
       <p class="muted mt-4">Ceritakan kebutuhanmu, kami balas lewat WhatsApp. Konsultasi, proposal, dan estimasi biaya tidak dipungut biaya.</p>
       <ul class="mt-6 grid gap-3 font-bold">
-        <li class="flex gap-3"><Icon n="chat" class="w-5 h-5 text-gold-400" /><a href={waLink()} class="underline">{site.phone}</a></li>
-        <li class="flex gap-3"><Icon n="mail" class="w-5 h-5 text-gold-400" /><a href={`mailto:${site.email}`} class="underline">{site.email}</a></li>
-        <li class="flex gap-3"><Icon n="clock" class="w-5 h-5 text-gold-400" />Buka 24 jam</li>
-        <li class="flex gap-3"><Icon n="pin" class="w-5 h-5 text-gold-400 shrink-0" />{site.address}</li>
+        <li class="flex gap-3"><Icon n="chat" class="w-5 h-5 text-gold-400" /><a href={waLink()} class="underline">{contact.phone}</a></li>
+        <li class="flex gap-3"><Icon n="mail" class="w-5 h-5 text-gold-400" /><a href={`mailto:${contact.email}`} class="underline">{contact.email}</a></li>
+        <li class="flex gap-3"><Icon n="clock" class="w-5 h-5 text-gold-400" />{contact.hours}</li>
+        <li class="flex gap-3"><Icon n="pin" class="w-5 h-5 text-gold-400 shrink-0" />{contact.address}</li>
       </ul>
     </div>
     <form id="lead" class="card p-6 grid gap-4" novalidate>
@@ -229,7 +228,7 @@ const tiers = [
     <div><img src="/img/logo.webp" alt="Transbara Dev" width="180" height="120" loading="lazy" class="h-24 w-auto" /><p class="mt-3 font-hand text-3xl tracking-wide text-gold-400">Deliver the Happiness</p></div>
     <div><h3 class="font-extrabold mb-3">Layanan</h3><ul class="grid gap-1">{services.slice(0,6).map(s => <li><a href="#layanan">{s.title}</a></li>)}</ul></div>
     <address class="not-italic"><h3 class="font-extrabold mb-3">Kontak</h3>
-      <p>{site.address}</p><p class="mt-2">WA: <a href={waLink()} class="underline">{site.phone}</a></p><p>{site.email}</p><p>Buka 24 jam</p></address>
+      <p>{contact.address}</p><p class="mt-2">WA: <a href={waLink()} class="underline">{contact.phone}</a></p><p>{contact.email}</p><p>{contact.hours}</p></address>
   </div>
   <p class="wrap mt-8 text-xs opacity-70">© {new Date().getFullYear()} Transbara Dev, software house Malang.</p>
 </footer>
@@ -237,7 +236,7 @@ const tiers = [
 <a href={waLink()} class="fixed bottom-5 right-5 z-50 btn btn-gold !rounded-full !p-4" aria-label="Chat WhatsApp Transbara Dev" id="fab"><Icon n="chat" class="w-7 h-7" /></a>
 </Base>
 
-<script define:vars={{ wa: site.wa }}>
+<script define:vars={{ wa: contact.wa }}>
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 $('#theme').onclick = () => { const n = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; try { localStorage.setItem('theme', n); } catch (e) {} };
 $('#burger').onclick = e => { const m = $('#mobmenu'); m.classList.toggle('hidden'); e.currentTarget.setAttribute('aria-expanded', !m.classList.contains('hidden')); };
@@ -256,6 +255,7 @@ $('#lead').onsubmit = e => {
   if (!f.get('nama').trim() || !/^[0-9+\-\s]{8,}$/.test(f.get('wa').trim())) { $('#err').textContent = 'Isi nama dan nomor WhatsApp yang valid ya.'; return; }
   $('#err').textContent = '';
   const m = `Halo Transbara Dev, saya ${f.get('nama')}${f.get('bisnis') ? ' dari ' + f.get('bisnis') : ''}.\nKebutuhan: ${f.get('butuh')}\nBudget: ${f.get('budget')}\nNo. WA: ${f.get('wa')}\n${f.get('cerita') || ''}`;
+  fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.fromEntries(f)), keepalive: true }).catch(() => {});
   open(`https://wa.me/${wa}?text=${encodeURIComponent(m)}`, '_blank');
 };
 </script>
