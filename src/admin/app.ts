@@ -18,17 +18,17 @@ const ICONS = ['rocket','cart','phone','cap','factory','users','receipt','clock'
 const KINDS = ['erp','lms','crm','pos','ai','landing'];
 
 const RES: Record<string, Res> = {
-  services: { label: 'Layanan', table: 'services', titleKey: 'title', cols: [['title', 'Judul'], ['audience', 'Cocok untuk']], newRow: { icon: 'spark', featured: false },
+  services: { label: 'Layanan', table: 'dev_services', titleKey: 'title', cols: [['title', 'Judul'], ['audience', 'Cocok untuk']], newRow: { icon: 'spark', featured: false },
     fields: [{ k: 'title', l: 'Judul', t: 'text', req: true }, { k: 'description', l: 'Deskripsi singkat', t: 'area' }, { k: 'audience', l: 'Cocok untuk', t: 'text', hint: 'mis. UMKM · Korporasi' }, { k: 'icon', l: 'Ikon', t: 'icon' }, { k: 'featured', l: 'Kartu lebar (featured)', t: 'bool' }] },
-  portfolio_items: { label: 'Portofolio', table: 'portfolio_items', titleKey: 'title', cols: [['title', 'Proyek'], ['category', 'Kategori'], ['metric', 'Hasil']], newRow: { category: 'Web Platform', mock_kind: 'landing', is_dummy: false },
+  portfolio_items: { label: 'Portofolio', table: 'dev_portfolio_items', titleKey: 'title', cols: [['title', 'Proyek'], ['category', 'Kategori'], ['metric', 'Hasil']], newRow: { category: 'Web Platform', mock_kind: 'landing', is_dummy: false },
     fields: [{ k: 'title', l: 'Nama proyek', t: 'text', req: true }, { k: 'category', l: 'Kategori', t: 'text', hint: 'Dipakai sebagai tab filter. mis. Web Platform, Mobile App, AI, Sistem Bisnis' }, { k: 'metric', l: 'Hasil (1 baris)', t: 'text', hint: 'mis. Leads naik 3x' }, { k: 'image_url', l: 'Gambar proyek', t: 'image', hint: 'Kosongkan untuk memakai ilustrasi bawaan' }, { k: 'mock_kind', l: 'Ilustrasi bawaan', t: 'select', opts: KINDS }, { k: 'live_url', l: 'Link proyek live (opsional)', t: 'text' }, { k: 'is_dummy', l: 'Ini data contoh (dummy)', t: 'bool' }] },
-  testimonials: { label: 'Testimoni', table: 'testimonials', titleKey: 'name', cols: [['name', 'Nama'], ['company', 'Perusahaan'], ['quote', 'Kutipan']], newRow: { rating: 5, is_dummy: false },
+  testimonials: { label: 'Testimoni', table: 'dev_testimonials', titleKey: 'name', cols: [['name', 'Nama'], ['company', 'Perusahaan'], ['quote', 'Kutipan']], newRow: { rating: 5, is_dummy: false },
     fields: [{ k: 'name', l: 'Nama', t: 'text', req: true }, { k: 'role', l: 'Jabatan', t: 'text' }, { k: 'company', l: 'Perusahaan', t: 'text' }, { k: 'quote', l: 'Kutipan', t: 'area', req: true }, { k: 'rating', l: 'Rating (1-5)', t: 'num' }, { k: 'is_dummy', l: 'Ini testimoni contoh (dummy)', t: 'bool' }] },
-  pricing_tiers: { label: 'Paket Harga', table: 'pricing_tiers', titleKey: 'name', cols: [['name', 'Paket'], ['price_label', 'Harga'], ['audience', 'Untuk']], newRow: { price_prefix: 'Mulai dari', features: [], highlighted: false },
+  pricing_tiers: { label: 'Paket Harga', table: 'dev_pricing_tiers', titleKey: 'name', cols: [['name', 'Paket'], ['price_label', 'Harga'], ['audience', 'Untuk']], newRow: { price_prefix: 'Mulai dari', features: [], highlighted: false },
     fields: [{ k: 'name', l: 'Nama paket', t: 'text', req: true }, { k: 'audience', l: 'Untuk siapa', t: 'text' }, { k: 'price_prefix', l: 'Awalan harga', t: 'text', hint: 'mis. Mulai dari / Harga' }, { k: 'price_label', l: 'Harga', t: 'text', req: true, hint: 'mis. Rp500rb / Custom quote' }, { k: 'description', l: 'Deskripsi', t: 'text' }, { k: 'features', l: 'Fitur (satu per baris)', t: 'lines' }, { k: 'highlighted', l: 'Tandai "Paling laris"', t: 'bool' }] },
-  process_steps: { label: 'Proses Kerja', table: 'process_steps', titleKey: 'title', cols: [['title', 'Langkah'], ['output', 'Hasil']], newRow: {},
+  process_steps: { label: 'Proses Kerja', table: 'dev_process_steps', titleKey: 'title', cols: [['title', 'Langkah'], ['output', 'Hasil']], newRow: {},
     fields: [{ k: 'title', l: 'Judul langkah', t: 'text', req: true }, { k: 'description', l: 'Deskripsi', t: 'area' }, { k: 'output', l: 'Hasil / output', t: 'text' }] },
-  faqs: { label: 'FAQ', table: 'faqs', titleKey: 'question', cols: [['question', 'Pertanyaan']], newRow: {},
+  faqs: { label: 'FAQ', table: 'dev_faqs', titleKey: 'question', cols: [['question', 'Pertanyaan']], newRow: {},
     fields: [{ k: 'question', l: 'Pertanyaan', t: 'text', req: true }, { k: 'answer', l: 'Jawaban', t: 'area', req: true }] },
 };
 
@@ -41,7 +41,7 @@ const fail = (e: { message: string } | null) => { if (e) { toast(e.message, true
 async function boot() {
   const { data } = await sb.auth.getSession();
   if (!data.session) return loginView();
-  const { data: ok, error } = await sb.rpc('is_admin');
+  const { data: ok, error } = await sb.rpc('dev_is_admin');
   if (error || !ok) { await sb.auth.signOut(); return loginView(error ? `Gagal cek hak akses: ${error.message}` : 'Akun ini bukan admin.'); }
   shell(data.session.user.email ?? '');
 }
@@ -84,13 +84,13 @@ const head = (t: string, right = '') => `<div class="flex flex-wrap items-center
 
 // ---------- dashboard ----------
 async function dashboard(m: HTMLElement) {
-  const tables = [...Object.values(RES).map(r => [r.label, r.table, r.table] as const), ['Leads baru', 'leads', 'leads']];
-  const counts = await Promise.all(tables.map(async ([l, t]) => {
+  const tables = [...Object.entries(RES).map(([k, r]) => [r.label, r.table, k] as const), ['Leads baru', 'dev_leads', 'leads']];
+  const counts = await Promise.all(tables.map(async ([l, t, v]) => {
     let q = sb.from(t).select('*', { count: 'exact', head: true }); if (l === 'Leads baru') q = q.eq('status', 'baru');
-    const { count, error } = await q; if (error) throw error; return [l, t, count ?? 0] as const;
+    const { count, error } = await q; if (error) throw error; return [l, v, count ?? 0] as const;
   }));
-  const dummy = await Promise.all(['portfolio_items', 'testimonials'].map(async t => (await sb.from(t).select('*', { count: 'exact', head: true }).eq('is_dummy', true)).count ?? 0));
-  m.innerHTML = head('Dashboard') + `<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${counts.map(([l, t, n]) => `<button data-v="${t === 'leads' ? 'leads' : t}" class="card p-5 text-left"><div class="font-hand text-5xl hl">${n}</div><div class="text-sm font-bold muted">${l}</div></button>`).join('')}</div>
+  const dummy = await Promise.all(['dev_portfolio_items', 'dev_testimonials'].map(async t => (await sb.from(t).select('*', { count: 'exact', head: true }).eq('is_dummy', true)).count ?? 0));
+  m.innerHTML = head('Dashboard') + `<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${counts.map(([l, t, n]) => `<button data-v="${t}" class="card p-5 text-left"><div class="font-hand text-5xl hl">${n}</div><div class="text-sm font-bold muted">${l}</div></button>`).join('')}</div>
   ${dummy[0] + dummy[1] ? `<div class="card p-5 mt-6 !border-yellow-400"><b>Masih ada data contoh (dummy) di situs:</b> ${dummy[0]} proyek portofolio, ${dummy[1]} testimoni. Ganti dengan data asli sebelum promosi.</div>` : ''}
   <p class="muted text-sm mt-6">Perubahan tampil di situs dalam ±30 detik (cache). Tutup tab ini dengan "Keluar" jika memakai komputer bersama.</p>`;
 }
@@ -139,9 +139,9 @@ function openForm(r: Res, row: any | null) {
   d.querySelectorAll<HTMLInputElement>('input[type=file][data-up]').forEach(inp => inp.onchange = async () => {
     const file = inp.files?.[0]; if (!file) return;
     if (file.size > 5 * 1024 * 1024) return toast('Maksimal 5 MB', true);
-    const path = `${r.table}/${Date.now()}-${file.name.replace(/[^a-z0-9._-]/gi, '_')}`;
-    const { error } = await sb.storage.from('media').upload(path, file, { contentType: file.type }); if (fail(error)) return;
-    const pub = sb.storage.from('media').getPublicUrl(path).data.publicUrl;
+    const path = `${r.table.replace('dev_', '')}/${Date.now()}-${file.name.replace(/[^a-z0-9._-]/gi, '_')}`;
+    const { error } = await sb.storage.from('dev-media').upload(path, file, { contentType: file.type }); if (fail(error)) return;
+    const pub = sb.storage.from('dev-media').getPublicUrl(path).data.publicUrl;
     (d.querySelector(`input[name=${inp.dataset.up}]`) as HTMLInputElement).value = pub;
     const p = $(`#f_${inp.dataset.up}_p`); p.outerHTML = `<img src="${esc(pub)}" alt="" class="h-16 rounded border-2 border-grape-700" id="f_${inp.dataset.up}_p" />`; toast('Gambar diunggah (klik Simpan)');
   });
@@ -164,14 +164,14 @@ async function onClick(e: Event) {
     const res = await Promise.all(order.map((oid, n) => sb.from(r.table).update({ sort_order: (n + 1) * 10 }).eq('id', oid)));
     if (res.some(x => fail(x.error))) return; go(view); return;
   }
-  if (act === 'lead-del') { if (!confirm('Hapus lead ini?')) return; const { error } = await sb.from('leads').delete().eq('id', id!); if (!fail(error)) go('leads'); return; }
+  if (act === 'lead-del') { if (!confirm('Hapus lead ini?')) return; const { error } = await sb.from('dev_leads').delete().eq('id', id!); if (!fail(error)) go('leads'); return; }
   if (act === 'csv') return exportCsv();
   if (act === 'stat-add') { const box = $('#stats'); box.insertAdjacentHTML('beforeend', statRow('', '')); return; }
   if (act === 'stat-del') return t.closest('.stat')!.remove();
 }
 app.addEventListener('change', async e => {
   const t = e.target as HTMLSelectElement;
-  if (t.dataset.lead) { const { error } = await sb.from('leads').update({ status: t.value }).eq('id', t.dataset.lead); if (!fail(error)) toast('Status diubah'); }
+  if (t.dataset.lead) { const { error } = await sb.from('dev_leads').update({ status: t.value }).eq('id', t.dataset.lead); if (!fail(error)) toast('Status diubah'); }
   if (t.id === 'lf-filter') leadFilter = t.value, go('leads');
 });
 
@@ -179,7 +179,7 @@ app.addEventListener('change', async e => {
 let leadFilter = 'semua'; let leadRows: any[] = [];
 const STATUS = ['baru', 'dihubungi', 'closing', 'batal'];
 async function leads(m: HTMLElement) {
-  let q = sb.from('leads').select('*').order('created_at', { ascending: false }).limit(500); if (leadFilter !== 'semua') q = q.eq('status', leadFilter);
+  let q = sb.from('dev_leads').select('*').order('created_at', { ascending: false }).limit(500); if (leadFilter !== 'semua') q = q.eq('status', leadFilter);
   const { data, error } = await q; if (error) throw error; leadRows = data ?? [];
   m.innerHTML = head('Leads Masuk', `<select id="lf-filter" class="field !w-auto !py-1.5 !border-2">${['semua', ...STATUS].map(s => `<option ${s === leadFilter ? 'selected' : ''}>${s}</option>`).join('')}</select><button class="a-btn" data-act="csv">Ekspor CSV</button>`) +
     (leadRows.length ? `<div class="grid gap-4">${leadRows.map(l => `<article class="card p-5"><div class="flex flex-wrap justify-between gap-3"><div><b class="text-lg">${esc(l.name)}</b>${l.business ? ` <span class="muted">· ${esc(l.business)}</span>` : ''}<div class="text-xs muted">${new Date(l.created_at).toLocaleString('id-ID')}</div></div>
@@ -197,7 +197,7 @@ function exportCsv() {
 // ---------- settings ----------
 const statRow = (v: string, l: string) => `<div class="stat flex gap-2"><input class="field !border-2 !border-grape-700" data-sv placeholder="Angka, mis. 7+" value="${esc(v)}" /><input class="field !border-2 !border-grape-700" data-sl placeholder="Label, mis. tahun" value="${esc(l)}" /><button type="button" class="a-btn a-del" data-act="stat-del">×</button></div>`;
 async function settings(m: HTMLElement) {
-  const { data, error } = await sb.from('site_settings').select('*'); if (error) throw error;
+  const { data, error } = await sb.from('dev_site_settings').select('*'); if (error) throw error;
   const s: any = Object.fromEntries((data ?? []).map(x => [x.key, x.value]));
   const c = s.contact ?? {}, h = s.hero ?? {};
   const inp = (g: string, k: string, l: string, v: unknown, area = false, hint = '') => `<label class="a-lbl">${l}${area ? `<textarea name="${g}.${k}" rows="3" class="field">${esc(v)}</textarea>` : `<input name="${g}.${k}" value="${esc(v)}" class="field" />`}${hint ? `<span class="font-normal opacity-60">${hint}</span>` : ''}</label>`;
@@ -220,7 +220,7 @@ async function settings(m: HTMLElement) {
       { key: 'stats', value: stats },
       { key: 'awards', value: String(f.get('awards') ?? '').split('\n').map(x => x.trim()).filter(Boolean) },
     ];
-    const { error } = await sb.from('site_settings').upsert(payload); if (!fail(error)) toast('Pengaturan tersimpan');
+    const { error } = await sb.from('dev_site_settings').upsert(payload); if (!fail(error)) toast('Pengaturan tersimpan');
   };
 }
 

@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   const row = { name: s(f.nama, 120), whatsapp: s(f.wa, 30), business: s(f.bisnis, 160) || null, need: s(f.butuh, 160) || null, budget: s(f.budget, 60) || null, message: s(f.cerita, 2000) || null };
   if (!row.name || !/^[0-9+\-\s]{6,30}$/.test(row.whatsapp)) return json({ error: 'Data tidak valid' }, 400);
   if (!configured) return json({ ok: true, stored: false });
-  const { error } = await sb().from('leads').insert(row);
+  const { error } = await sb().from('dev_leads').insert(row);
   if (error) { console.error('[lead]', error.message); return json({ error: 'Gagal menyimpan' }, 500); }
   return json({ ok: true, stored: true });
 };

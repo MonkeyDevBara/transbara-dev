@@ -23,10 +23,10 @@ let inflight: Promise<Content> | null = null;
 
 async function fetchAll(): Promise<Content> {
   const c = sb();
-  const list = (t: string) => c.from(t).select('*').eq('published', true).order('sort_order').then(r => { if (r.error) throw new Error(`${t}: ${r.error.message}`); return r.data as any[]; });
+  const list = (t: string) => c.from(`dev_${t}`).select('*').eq('published', true).order('sort_order').then(r => { if (r.error) throw new Error(`${t}: ${r.error.message}`); return r.data as any[]; });
   const [services, portfolio_items, testimonials, pricing_tiers, process_steps, faqs, st] = await Promise.all([
     list('services'), list('portfolio_items'), list('testimonials'), list('pricing_tiers'), list('process_steps'), list('faqs'),
-    c.from('site_settings').select('key,value').then(r => { if (r.error) throw new Error(`site_settings: ${r.error.message}`); return r.data as { key: string; value: any }[]; }),
+    c.from('dev_site_settings').select('key,value').then(r => { if (r.error) throw new Error(`site_settings: ${r.error.message}`); return r.data as { key: string; value: any }[]; }),
   ]);
   const settings = { ...defaults.settings } as any;
   for (const { key, value } of st) settings[key] = Array.isArray(value) ? value : { ...(settings[key] ?? {}), ...value };
