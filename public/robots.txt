@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dev.transbara.my.id/sitemap.xml

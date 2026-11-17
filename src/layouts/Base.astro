@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import { site, faqs, services } from '../data/site';
+const title = 'Transbara Dev | Jasa Pembuatan Website, Aplikasi & AI Custom — Software House Malang';
+const desc = 'Software house Malang 7+ tahun. Jasa pembuatan website, aplikasi, LMS, ERP, CRM & AI custom untuk UMKM hingga korporasi. Konsultasi gratis, garansi 1 tahun.';
+const ld = [
+  { '@context': 'https://schema.org', '@type': ['Organization', 'ProfessionalService'], name: site.name, url: site.url + '/',
+    logo: site.url + '/img/mark.webp', image: site.url + '/img/logo.webp', description: desc, slogan: site.tagline,
+    telephone: '+62-821-1958-9966', email: site.email, priceRange: 'Rp500.000+', areaServed: 'ID',
+    address: { '@type': 'PostalAddress', streetAddress: 'Jl. Bandulan 6/K2 No.64, Sukun', addressLocality: 'Malang', addressRegion: 'Jawa Timur', addressCountry: 'ID' },
+    openingHoursSpecification: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '00:00', closes: '23:59' },
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Layanan', itemListElement: services.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.title, description: s.desc } })) } },
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: site.url + '/' },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+];
+---
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={desc} />
+  <link rel="canonical" href={site.url + '/'} />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#1a0b2e" />
+  <link rel="icon" href="/favicon.png" /><link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta property="og:type" content="website" /><meta property="og:locale" content="id_ID" />
+  <meta property="og:site_name" content={site.name} /><meta property="og:title" content={title} />
+  <meta property="og:description" content={desc} /><meta property="og:url" content={site.url + '/'} />
+  <meta property="og:image" content={site.url + '/img/logo.webp'} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" as="image" href="/img/mark.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <script is:inline>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+  {ld.map(o => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+</head>
+<body><slot /></body>
+</html>
