@@ -56,27 +56,19 @@ body::before { content:""; position:fixed; inset:0; z-index:60; pointer-events:n
 .squig { background:linear-gradient(var(--color-gold-400),var(--color-gold-400)) 0 100%/100% 6px no-repeat; padding-bottom:2px; }
 
 /* neon hover */
-.neon, .card, .btn, .wanted, .bubble { --glow:0 0 0 1.5px var(--neon2), 0 0 10px var(--neon), 0 0 34px rgba(124,58,237,.85), 0 0 80px rgba(124,58,237,.45); }
-.card:hover, .wanted:hover, .bubble:hover { border-color:var(--neon2); box-shadow:var(--glow), inset 0 0 22px rgba(168,85,247,.28); }
+.neon, .card, .btn, .bubble { --glow:0 0 0 1.5px var(--neon2), 0 0 10px var(--neon), 0 0 34px rgba(124,58,237,.85), 0 0 80px rgba(124,58,237,.45); }
+.card:hover, .bubble:hover { border-color:var(--neon2); box-shadow:var(--glow), inset 0 0 22px rgba(168,85,247,.28); }
 .btn-ghost:hover { border-color:var(--neon2); color:#fff; box-shadow:var(--glow); background:rgba(124,58,237,.35); }
 .btn-gold:hover { box-shadow:0 0 0 2px #fff, 0 0 18px var(--color-gold-400), 0 0 44px var(--neon); }
 .spot { position:relative; isolation:isolate; }
 .spot::before { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:0; transition:opacity .4s;
-  background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%), rgba(168,85,247,.30), transparent 65%); }
+  background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%), rgba(168,85,247,.18), transparent 65%); }
 .spot:hover::before { opacity:1; }
-.spot:hover .h2 { text-shadow:0 0 14px rgba(192,132,252,.9), 0 0 40px rgba(124,58,237,.8); transition:text-shadow .3s; }
-.spot:hover .eyebrow { text-shadow:0 0 10px var(--neon); }
 .ico { transition:filter .2s, color .2s; }
 .card:hover .ico { color:var(--neon2); filter:drop-shadow(0 0 6px var(--neon)) drop-shadow(0 0 14px var(--neon)); }
-.card:hover h3, .wanted:hover .bounty { text-shadow:0 0 12px rgba(192,132,252,.85); }
+.card:hover h3 { text-shadow:0 0 12px rgba(192,132,252,.85); }
 nav a { position:relative; transition:text-shadow .2s, color .2s; } nav a:hover { color:var(--neon2); text-shadow:0 0 12px var(--neon); }
 
-/* wanted poster */
-.wanted { background:#ecd9a6; color:#2b1a10; border:3px solid #2b1a10; border-radius:.35rem; padding:.9rem .9rem 1.1rem; position:relative; box-shadow:5px 5px 0 var(--shadow); transition:transform .2s, box-shadow .2s, border-color .2s;
-  background-image:radial-gradient(rgba(120,80,20,.18) 1px, transparent 1.4px); background-size:7px 7px; }
-.wanted:hover { transform:rotate(0deg) translateY(-6px) !important; }
-.wanted .tape { position:absolute; top:-10px; left:50%; width:70px; height:20px; background:rgba(250,204,21,.8); transform:translateX(-50%) rotate(-3deg); }
-.bounty { font-family:"Bangers"; font-size:1.6rem; letter-spacing:.05em; }
 /* manga bubble */
 .bubble { background:#fff; color:#1a0b2e; border:3px solid #0f0a1a; border-radius:1.6rem 1.6rem 1.6rem .3rem; padding:1.4rem; position:relative; box-shadow:5px 5px 0 var(--shadow); transition:box-shadow .2s, border-color .2s; }
 .bubble::after { content:""; position:absolute; left:26px; bottom:-18px; width:26px; height:20px; background:#fff; border:3px solid #0f0a1a; border-top:0; border-right:0; transform:skewX(-35deg); clip-path:polygon(0 0,100% 0,0 100%); }

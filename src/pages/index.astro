@@ -13,7 +13,6 @@ const tiers = [
   ['Growth','Bisnis berkembang','Rp5 juta','Web app, LMS, CRM, aplikasi mobile',['Fitur sesuai alur bisnis','Dashboard admin','Integrasi payment / WhatsApp','Garansi bug 1 tahun'],true],
   ['Enterprise','Korporasi','Custom','ERP, sistem terintegrasi, AI',['Analisis kebutuhan mendalam','Integrasi sistem lama','NDA tersedia','Garansi bug 1 tahun'],false],
 ];
-const rot = [-2.2, 1.6, -1.2, 2, -1.8, 1.2];
 ---
 <Base>
 <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all">
@@ -35,7 +34,7 @@ const rot = [-2.2, 1.6, -1.2, 2, -1.8, 1.2];
 </header>
 
 <main>
-<section class="pt-32 pb-20 overflow-hidden spot">
+<section class="pt-32 pb-20 overflow-hidden">
   <div class="speed"></div>
   <div class="smoke w-96 h-96 bg-grape-500 -top-10 -left-20"></div>
   <div class="wrap grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-center relative">
@@ -114,15 +113,15 @@ const rot = [-2.2, 1.6, -1.2, 2, -1.8, 1.2];
     <div class="flex flex-wrap gap-3 mt-8" role="tablist">
       {cats.map((c,i) => <button class={`btn btn-ghost !py-2 !px-4 text-sm filter ${i===0?'!bg-gold-400 !text-ink !border-ink':''}`} data-f={c}>{c}</button>)}
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-      {portfolio.map((p,i) => (
-        <article class="wanted pf" data-cat={p.cat} style={`transform:rotate(${rot[i]}deg)`}>
-          <span class="tape"></span>
-          <p class="font-hand text-4xl text-center leading-none tracking-widest">PROYEK</p>
-          <div class="mt-2 border-[3px] border-[#2b1a10] bg-[#f6ecd0] aspect-[16/9]"><Mock kind={p.kind} /></div>
-          <h3 class="font-extrabold text-lg mt-3 text-center leading-tight">{p.title}</h3>
-          <p class="text-center text-xs font-bold uppercase tracking-wider opacity-70">{p.cat}</p>
-          <p class="bounty text-center mt-1 text-[#6d28d9]">{p.metric}</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      {portfolio.map(p => (
+        <article class="card pf overflow-hidden" data-cat={p.cat}>
+          <div class="aspect-[16/9] bg-[#f6ecd0] border-b-[3px] border-ink p-2"><Mock kind={p.kind} /></div>
+          <div class="p-5">
+            <p class="text-xs font-bold uppercase tracking-wider muted">{p.cat}</p>
+            <h3 class="font-extrabold text-lg mt-1">{p.title}</h3>
+            <p class="mt-3 font-bold text-gold-400">{p.metric}</p>
+          </div>
         </article>))}
     </div>
     <p class="muted text-xs mt-8">* Contoh proyek ilustratif. Demo dan studi kasus asli kami tunjukkan saat konsultasi.</p>
