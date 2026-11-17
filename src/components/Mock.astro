@@ -1,0 +1,29 @@
+---
+const { kind } = Astro.props;
+---
+<svg viewBox="0 0 320 180" class="w-full h-full" role="img" aria-label={`Ilustrasi tampilan ${kind}`} fill="none" stroke="#2b1a10" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+  <rect x="8" y="8" width="304" height="164" rx="10" fill="#f6ecd0"/>
+  <path d="M8 30h304" /><circle cx="22" cy="19" r="3" fill="#7c3aed"/><circle cx="33" cy="19" r="3" fill="#facc15"/><circle cx="44" cy="19" r="3" fill="#fff"/>
+  {kind==='erp' && <>
+    <rect x="20" y="42" width="60" height="120" fill="#ddd6fe"/><path d="M28 56h44M28 72h44M28 88h30"/>
+    <rect x="92" y="42" width="64" height="40" fill="#fff"/><rect x="164" y="42" width="64" height="40" fill="#facc15"/><rect x="236" y="42" width="64" height="40" fill="#fff"/>
+    <path d="M100 150V120M116 150V104M132 150V128M148 150V96M180 150V112M196 150V90M212 150V122" stroke-width="8" stroke="#7c3aed"/><path d="M92 156h210"/></>}
+  {kind==='lms' && <>
+    <rect x="20" y="42" width="170" height="100" fill="#4c1d95"/><path d="M92 74l34 18-34 18z" fill="#facc15"/>
+    <rect x="202" y="42" width="98" height="22" fill="#fff"/><rect x="202" y="72" width="98" height="22" fill="#ddd6fe"/><rect x="202" y="102" width="98" height="22" fill="#fff"/>
+    <path d="M20 154h170" stroke-width="6" stroke="#ddd6fe"/><path d="M20 154h110" stroke-width="6" stroke="#7c3aed"/></>}
+  {kind==='crm' && <>
+    {[0,1,2].map(i => <><rect x={20+i*98} y="42" width="88" height="120" fill={i===1?'#ddd6fe':'#fff'}/><rect x={28+i*98} y="52" width="72" height="22" fill={i===2?'#facc15':'#fff'}/><rect x={28+i*98} y="82" width="72" height="22" fill="#fff"/><rect x={28+i*98} y="112" width="72" height="22" fill="#fff"/></>)}</>}
+  {kind==='pos' && <>
+    <rect x="20" y="42" width="180" height="120" fill="#fff"/>
+    {[0,1,2,3,4,5].map(i => <rect x={28+(i%3)*58} y={50+Math.floor(i/3)*54} width="50" height="46" fill={i===1?'#facc15':'#ddd6fe'}/>)}
+    <rect x="212" y="42" width="88" height="120" fill="#4c1d95"/><path d="M222 62h68M222 80h68M222 98h50" stroke="#fff"/><rect x="222" y="132" width="68" height="20" fill="#facc15"/></>}
+  {kind==='ai' && <>
+    <rect x="20" y="44" width="150" height="26" rx="12" fill="#fff"/><rect x="150" y="80" width="150" height="26" rx="12" fill="#7c3aed"/>
+    <rect x="20" y="116" width="170" height="26" rx="12" fill="#fff"/><path d="M36 57h90M166 93h110M36 129h120" stroke={'#2b1a10'}/>
+    <path d="M262 142l16 12 16-12" fill="#facc15"/></>}
+  {kind==='landing' && <>
+    <rect x="20" y="42" width="280" height="62" fill="#4c1d95"/><path d="M36 62h110M36 76h80" stroke="#fff"/><rect x="36" y="86" width="52" height="12" fill="#facc15"/>
+    <rect x="216" y="50" width="72" height="46" fill="#ddd6fe"/>
+    {[0,1,2].map(i => <rect x={20+i*96} y="116" width="88" height="46" fill="#fff"/>)}</>}
+</svg>

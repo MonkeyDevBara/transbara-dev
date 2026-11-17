@@ -11,28 +11,28 @@ export const waLink = (msg = 'Halo Transbara Dev, saya mau konsultasi gratis unt
   `https://wa.me/${site.wa}?text=${encodeURIComponent(msg)}`;
 
 export const services = [
-  { icon: '🚀', title: 'Landing Page & Company Profile', desc: 'Tampil kredibel & muncul di Google, ubah pengunjung jadi pembeli.', tag: 'UMKM', big: true },
-  { icon: '🛒', title: 'Website Custom & E-Commerce', desc: 'Jualan 24 jam tanpa bergantung marketplace.', tag: 'UMKM · Korporasi' },
-  { icon: '📱', title: 'Aplikasi Mobile', desc: 'Bisnismu ada di genggaman pelanggan (Android/iOS).', tag: 'Semua skala' },
-  { icon: '🎓', title: 'LMS', desc: 'Kelas, kursus & pelatihan karyawan online, terukur.', tag: 'Korporasi · Sekolah' },
-  { icon: '🏭', title: 'ERP', desc: 'Stok, keuangan, produksi, HR dalam satu sistem.', tag: 'Korporasi', big: true },
-  { icon: '🤝', title: 'CRM', desc: 'Leads & pelanggan terkelola, repeat order naik.', tag: 'Bisnis' },
-  { icon: '🧾', title: 'Kasir / POS & Inventory', desc: 'Transaksi cepat, stok akurat real-time.', tag: 'UMKM' },
-  { icon: '🕒', title: 'HRIS & Absensi', desc: 'Absensi, payroll, cuti otomatis.', tag: 'Bisnis' },
-  { icon: '🏫', title: 'Sistem Sekolah / Pesantren', desc: 'Administrasi, akademik, keuangan terintegrasi.', tag: 'Institusi' },
-  { icon: '🤖', title: 'AI Custom', desc: 'Chatbot CS 24/7, otomasi kerja, insight dari data.', tag: 'Semua skala', big: true },
-  { icon: '🔌', title: 'Integrasi & API', desc: 'Hubungkan payment gateway, WhatsApp, sistem lama.', tag: 'Bisnis' },
-  { icon: '🛠️', title: 'Maintenance', desc: 'Sistem tetap aman, cepat, dan berkembang.', tag: 'Semua skala' },
+  { icon: 'rocket', title: 'Landing Page & Company Profile', desc: 'Tampil kredibel & muncul di Google, ubah pengunjung jadi pembeli.', tag: 'UMKM', big: true },
+  { icon: 'cart', title: 'Website Custom & E-Commerce', desc: 'Jualan 24 jam tanpa bergantung marketplace.', tag: 'UMKM · Korporasi' },
+  { icon: 'phone', title: 'Aplikasi Mobile', desc: 'Bisnismu ada di genggaman pelanggan (Android/iOS).', tag: 'Semua skala' },
+  { icon: 'cap', title: 'LMS', desc: 'Kelas, kursus & pelatihan karyawan online, terukur.', tag: 'Korporasi · Sekolah' },
+  { icon: 'factory', title: 'ERP', desc: 'Stok, keuangan, produksi, HR dalam satu sistem.', tag: 'Korporasi', big: true },
+  { icon: 'users', title: 'CRM', desc: 'Leads & pelanggan terkelola, repeat order naik.', tag: 'Bisnis' },
+  { icon: 'receipt', title: 'Kasir / POS & Inventory', desc: 'Transaksi cepat, stok akurat real-time.', tag: 'UMKM' },
+  { icon: 'clock', title: 'HRIS & Absensi', desc: 'Absensi, payroll, cuti otomatis.', tag: 'Bisnis' },
+  { icon: 'school', title: 'Sistem Sekolah / Pesantren', desc: 'Administrasi, akademik, keuangan terintegrasi.', tag: 'Institusi' },
+  { icon: 'bot', title: 'AI Custom', desc: 'Chatbot CS 24/7, otomasi kerja, insight dari data.', tag: 'Semua skala' },
+  { icon: 'plug', title: 'Integrasi & API', desc: 'Hubungkan payment gateway, WhatsApp, sistem lama.', tag: 'Bisnis' },
+  { icon: 'wrench', title: 'Maintenance', desc: 'Sistem tetap aman, cepat, dan berkembang.', tag: 'Semua skala' },
 ];
 
 // DUMMY — edit sendiri
 export const portfolio = [
-  { title: 'ERP Distributor Sembako', cat: 'Sistem Bisnis', metric: 'Rekap stok 80% lebih cepat', emoji: '🏭', c: 'from-violet-600 to-fuchsia-500' },
-  { title: 'LMS Pelatihan Karyawan', cat: 'Web Platform', metric: '1.200 karyawan aktif', emoji: '🎓', c: 'from-indigo-600 to-sky-500' },
-  { title: 'CRM Klinik Kecantikan', cat: 'Sistem Bisnis', metric: 'Repeat order naik 35%', emoji: '💄', c: 'from-pink-600 to-orange-400' },
-  { title: 'Aplikasi Kasir Coffee Shop', cat: 'Mobile App', metric: 'Transaksi 2x lebih cepat', emoji: '☕', c: 'from-amber-500 to-red-500' },
-  { title: 'AI Chatbot WhatsApp Toko Online', cat: 'AI', metric: '70% chat terjawab otomatis', emoji: '🤖', c: 'from-emerald-500 to-cyan-500' },
-  { title: 'Landing Page Properti', cat: 'Web Platform', metric: 'Leads naik 3x', emoji: '🏡', c: 'from-purple-600 to-yellow-400' },
+  { title: 'ERP Distributor Sembako', cat: 'Sistem Bisnis', metric: 'Rekap stok 80% lebih cepat', kind: 'erp' },
+  { title: 'LMS Pelatihan Karyawan', cat: 'Web Platform', metric: '1.200 karyawan aktif', kind: 'lms' },
+  { title: 'CRM Klinik Kecantikan', cat: 'Sistem Bisnis', metric: 'Repeat order naik 35%', kind: 'crm' },
+  { title: 'Aplikasi Kasir Coffee Shop', cat: 'Mobile App', metric: 'Transaksi 2x lebih cepat', kind: 'pos' },
+  { title: 'AI Chatbot WhatsApp Toko Online', cat: 'AI', metric: '70% chat terjawab otomatis', kind: 'ai' },
+  { title: 'Landing Page Properti', cat: 'Web Platform', metric: 'Leads naik 3x', kind: 'landing' },
 ];
 
 // DUMMY — edit sendiri

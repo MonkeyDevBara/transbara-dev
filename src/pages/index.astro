@@ -1,9 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Mock from '../components/Mock.astro';
 import { site, waLink, services, portfolio, testimonials, process, faqs } from '../data/site';
 const cats = ['Semua', ...new Set(portfolio.map(p => p.cat))];
 const marq = ['Landing Page','LMS','ERP','CRM','Mobile App','AI Chatbot','Kasir/POS','HRIS','E-Commerce','Integrasi API'];
 const awards = ['1st Winner Indigo Betalist','Top 10 Hetero for Startup','Top 10 Techibition','Top 10 F+','Top 10 Hatch by 1000 Startup Digital'];
+const pains = [['file','Data tercecer di Excel, versinya beda-beda','Satu sistem terpusat. Semua tim lihat angka yang sama.'],['clock','Admin lembur rekap manual tiap akhir bulan','Laporan jadi sendiri, tim fokus ke kerjaan yang penting.'],['chat','Chat pelanggan telat dibalas, order lari','Chatbot jawab 24 jam dan oper ke manusia kalau perlu.'],['snail','Website lambat dan tidak muncul di Google','Web cepat, rapi untuk SEO, gampang ditemukan.']];
+const keunggulan = [['puzzle','100% custom','Dibuat dari alur kerja bisnismu, bukan template jadi.'],['gift','Konsultasi dan proposal gratis','Tanpa kewajiban order.'],['bolt','Respon cepat','Satu PIC, progres dilaporkan rutin, kontak buka 24 jam.'],['shield','Garansi bug 1 tahun','Setelah launch, perbaikan bug tanpa biaya.'],['lock','Aman dan siap berkembang','Arsitektur rapi, siap tambah fitur dan integrasi AI.'],['trophy','Produk berprestasi','Produk kami pernah juara dan masuk Top 10 kompetisi startup.']];
+const tiers = [
+  ['Starter','UMKM','Rp500rb','Landing page / company profile',['Desain custom responsif','SEO dasar','Tombol WhatsApp','Garansi bug 1 tahun'],false],
+  ['Growth','Bisnis berkembang','Rp5 juta','Web app, LMS, CRM, aplikasi mobile',['Fitur sesuai alur bisnis','Dashboard admin','Integrasi payment / WhatsApp','Garansi bug 1 tahun'],true],
+  ['Enterprise','Korporasi','Custom','ERP, sistem terintegrasi, AI',['Analisis kebutuhan mendalam','Integrasi sistem lama','NDA tersedia','Garansi bug 1 tahun'],false],
+];
+const rot = [-2.2, 1.6, -1.2, 2, -1.8, 1.2];
 ---
 <Base>
 <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all">
@@ -13,9 +23,9 @@ const awards = ['1st Winner Indigo Betalist','Top 10 Hetero for Startup','Top 10
       <a href="#layanan">Layanan</a><a href="#portofolio">Portofolio</a><a href="#harga">Harga</a><a href="#proses">Proses</a><a href="#testimoni">Testimoni</a><a href="#faq">FAQ</a>
     </nav>
     <div class="flex items-center gap-2">
-      <button id="theme" class="btn btn-ghost !p-2 !px-3" aria-label="Ganti tema">🌗</button>
+      <button id="theme" class="btn btn-ghost !p-2 !px-3" aria-label="Ganti tema"><Icon n="moon" class="w-5 h-5" /></button>
       <a href={waLink()} class="btn btn-gold hidden sm:inline-flex text-sm !py-2">Konsultasi Gratis</a>
-      <button id="burger" class="md:hidden btn btn-ghost !p-2 !px-3" aria-label="Menu" aria-expanded="false">☰</button>
+      <button id="burger" class="md:hidden btn btn-ghost !p-2 !px-3" aria-label="Menu" aria-expanded="false"><Icon n="menu" class="w-5 h-5" /></button>
     </div>
   </div>
   <div id="mobmenu" class="hidden md:hidden bg-surface border-t-4 border-gold-400 px-5 py-4 grid gap-3 font-bold">
@@ -25,203 +35,183 @@ const awards = ['1st Winner Indigo Betalist','Top 10 Hetero for Startup','Top 10
 </header>
 
 <main>
-<!-- HERO -->
-<section class="pt-32 pb-16 overflow-hidden">
-  <div class="smoke w-96 h-96 bg-grape-500 -top-10 -left-20"></div><div class="smoke w-80 h-80 bg-gold-400 bottom-0 right-0 !opacity-20"></div>
-  <div class="wrap grid lg:grid-cols-2 gap-10 items-center relative">
+<section class="pt-32 pb-20 overflow-hidden spot">
+  <div class="speed"></div>
+  <div class="smoke w-96 h-96 bg-grape-500 -top-10 -left-20"></div>
+  <div class="wrap grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-center relative">
     <div>
-      <span class="sticker">🎁 Konsultasi GRATIS!</span>
-      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.02] mt-5">Bikin Bisnismu <span class="hl">Naik Level</span> Lewat Aplikasi Custom.</h1>
-      <p class="muted text-lg mt-5 max-w-xl">Software house dari Malang. Web, aplikasi &amp; AI custom untuk UMKM sampai korporasi. <b>7+ tahun</b> pengalaman, <b>puluhan proyek besar</b> terdeliver, garansi <b>1 tahun</b>.</p>
+      <span class="sticker font-hand !text-lg tracking-wide">Konsultasi gratis, tanpa syarat</span>
+      <h1 class="text-5xl sm:text-6xl lg:text-[4.6rem] font-extrabold leading-[1] mt-5">Bisnismu butuh <span class="hl squig">aplikasi</span> yang bikin ia berlayar lebih jauh.</h1>
+      <p class="muted text-lg mt-6 max-w-xl">Kami software house di Malang. Bikin website, aplikasi, dan AI custom untuk usaha kecil sampai perusahaan besar. Sudah 7 tahun lebih dan puluhan proyek besar selesai dengan client yang puas.</p>
       <div class="flex flex-wrap gap-4 mt-8">
-        <a href={waLink()} class="btn btn-gold text-lg">💬 Konsultasi Gratis via WhatsApp</a>
-        <a href="#portofolio" class="btn btn-ghost text-lg">Lihat Hasil Kerja Kami</a>
+        <a href={waLink()} class="btn btn-gold text-lg"><Icon n="chat" class="w-5 h-5" /> Chat via WhatsApp</a>
+        <a href="#portofolio" class="btn btn-ghost text-lg">Lihat hasil kerja</a>
       </div>
-      <ul class="flex flex-wrap gap-x-5 gap-y-2 mt-8 text-sm font-bold muted">
-        <li>⭐ 7+ Tahun</li><li>🏆 Puluhan Proyek Besar</li><li>🏫 100+ Sekolah Pengguna</li><li>🛡️ Garansi 1 Tahun</li>
-      </ul>
+      <dl class="flex flex-wrap gap-x-8 gap-y-3 mt-10">
+        {[['7+','tahun'],['Puluhan','proyek besar'],['100+','sekolah pengguna'],['1 th','garansi bug']].map(([a,b]) => <div><dt class="font-hand text-3xl hl leading-none">{a}</dt><dd class="text-xs font-bold muted uppercase tracking-wider">{b}</dd></div>)}
+      </dl>
     </div>
-    <div class="relative flex justify-center">
-      <img src="/img/mark.webp" alt="Logo Transbara Dev: buah ungu dengan huruf T emas" width="520" height="520" fetchpriority="high" class="float w-72 sm:w-[28rem] drop-shadow-[0_20px_40px_rgba(124,58,237,.6)]" />
-      <span class="sticker absolute top-4 left-2 hidden sm:inline-block" style="--r:-6deg">Made in Malang 🇮🇩</span>
-      <div class="card absolute bottom-2 right-0 sm:right-4 px-4 py-3 text-sm font-bold" style="--r:3deg">📈 Leads naik 3x<br><span class="muted font-normal">landing page properti</span></div>
-      <div class="card absolute top-1/3 -left-2 sm:-left-6 px-4 py-3 text-sm font-bold">🤖 70% chat dijawab AI</div>
+    <div class="relative flex justify-center lg:justify-end">
+      <img src="/img/mark.webp" alt="Logo Transbara Dev: buah ungu dengan huruf T emas" width="520" height="520" fetchpriority="high" class="float w-72 sm:w-[28rem] lg:scale-110 drop-shadow-[0_0_40px_rgba(168,85,247,.75)]" />
+      <span class="sticker font-hand !text-xl absolute top-2 left-0 hidden sm:inline-block" style="--r:-7deg">Made in Malang</span>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="bg-gold-400 text-ink border-y-4 border-ink py-3 overflow-hidden -rotate-1 scale-105" aria-hidden="true">
-  <div class="marquee font-display font-extrabold text-xl uppercase">
-    {[0,1].map(() => marq.map(m => <span class="mx-6">{m} ✦</span>))}
-  </div>
+  <div class="marquee font-hand text-3xl uppercase">{[0,1].map(() => marq.map(m => <span class="mx-6">{m} <span class="text-grape-700">/</span></span>))}</div>
 </div>
 
-<!-- MASALAH -->
-<section>
+<section class="spot">
   <div class="wrap">
-    <p class="eyebrow">Masih begini?</p>
-    <h2 class="h2 mt-2 max-w-2xl">Bisnis jalan, tapi <span class="hl">ribet</span> terus?</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-      {[['📊','Data masih di Excel beda-beda versi','Satu sistem terpusat, data selalu sinkron.'],['⏰','Admin lembur rekap manual','Laporan otomatis, tim fokus kerja penting.'],['💬','Customer chat nggak kebales','Chatbot AI jawab 24/7, leads nggak lolos.'],['🐢','Web jadul, nggak muncul di Google','Website cepat, SEO-ready, tampil di pencarian.']].map(([i,p,s],n) => (
-        <div class="card p-6 reveal" style={`--r:${n%2?2:-2}deg`}>
-          <div class="text-4xl">{i}</div><h3 class="font-extrabold text-lg mt-3">{p}</h3>
-          <p class="mt-3 text-sm"><span class="sticker" style="--r:-2deg">Solusi</span> <span class="muted">{s}</span></p>
+    <p class="eyebrow">Kenal gejalanya?</p>
+    <h2 class="h2 mt-2 max-w-2xl">Usahanya jalan, tapi kerjanya <span class="hl">ribet</span> terus.</h2>
+    <div class="grid sm:grid-cols-2 gap-6 mt-10">
+      {pains.map(([i,p,sol],n) => (
+        <div class={`card p-6 reveal flex gap-5 ${n%2 ? 'sm:translate-y-6' : ''}`}>
+          <Icon n={i} class="ico w-10 h-10 shrink-0 text-gold-400" />
+          <div><h3 class="font-extrabold text-lg">{p}</h3><p class="mt-2 text-sm muted"><b class="text-gold-400">Solusinya:</b> {sol}</p></div>
         </div>))}
     </div>
   </div>
 </section>
 
-<!-- LAYANAN -->
-<section id="layanan" class="bg-surface">
+<section id="layanan" class="bg-surface spot">
   <div class="wrap">
     <p class="eyebrow">Layanan</p>
-    <h2 class="h2 mt-2 max-w-3xl">Satu tim, <span class="hl">semua</span> kebutuhan digital bisnismu.</h2>
+    <h2 class="h2 mt-2 max-w-3xl">Satu tim untuk <span class="hl">semua</span> kebutuhan digital bisnismu.</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 auto-rows-fr">
       {services.map(s => (
         <article class={`card p-6 reveal ${s.big ? 'lg:col-span-2' : ''}`}>
-          <div class="text-4xl">{s.icon}</div>
-          <h3 class="font-extrabold text-xl mt-3">{s.title}</h3>
+          <Icon n={s.icon} class="ico w-9 h-9 text-gold-400" />
+          <h3 class="font-extrabold text-xl mt-4">{s.title}</h3>
           <p class="muted mt-2 text-sm">{s.desc}</p>
           <span class="inline-block mt-4 text-xs font-bold border-2 border-current rounded-full px-3 py-1 muted">Cocok: {s.tag}</span>
         </article>))}
-      <a href={waLink('Halo Transbara Dev, saya butuh aplikasi custom yang tidak ada di daftar layanan.')} class="card p-6 bg-gold-400 !text-ink flex flex-col justify-center lg:col-span-2" style="background:var(--color-gold-400);color:var(--color-ink)">
-        <div class="text-4xl">✨</div><h3 class="font-extrabold text-2xl mt-2">Nggak nemu yang kamu butuh?</h3><p class="font-bold mt-1">Kita bikinin custom → ngobrol dulu, gratis.</p>
+      <a href={waLink('Halo Transbara Dev, saya butuh aplikasi custom yang tidak ada di daftar layanan.')} class="card p-6 flex flex-col justify-center lg:col-span-2" style="background:var(--color-gold-400);color:var(--color-ink)">
+        <Icon n="spark" class="ico w-9 h-9" /><h3 class="font-hand text-4xl mt-2 tracking-wide">Nggak ada yang cocok?</h3><p class="font-bold mt-1">Ceritakan idenya, kami rancang dari nol. Ngobrol dulu, gratis.</p>
       </a>
     </div>
   </div>
 </section>
 
-<!-- KEUNGGULAN -->
-<section>
+<section class="spot">
   <div class="wrap">
     <p class="eyebrow">Kenapa Transbara Dev</p>
-    <h2 class="h2 mt-2 max-w-3xl">Bukan jualan fitur, tapi <span class="hl">servis excellent</span>.</h2>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-      {[['7+','Tahun pengalaman'],['100+','Sekolah pengguna sistem kami'],['12','Kategori layanan'],['1 Th','Garansi bug']].map(([n,l]) => (
-        <div class="card p-6 text-center reveal"><div class="font-display text-5xl font-extrabold hl">{n}</div><div class="muted text-sm font-bold mt-1">{l}</div></div>))}
+    <h2 class="h2 mt-2 max-w-3xl">Yang kami jual itu <span class="hl">servis</span>, bukan daftar fitur.</h2>
+    <div class="grid md:grid-cols-3 gap-5 mt-10">
+      {keunggulan.map(([i,t,d]) => (
+        <div class="card p-6 reveal flex gap-4"><Icon n={i} class="ico w-8 h-8 shrink-0 text-gold-400" /><div><h3 class="font-extrabold">{t}</h3><p class="muted text-sm mt-1">{d}</p></div></div>))}
     </div>
-    <div class="grid md:grid-cols-3 gap-5 mt-5">
-      {[['🧩','100% Custom','Mengikuti alur bisnismu, bukan template.'],['🎁','Konsultasi & Proposal Gratis','Tanpa kewajiban order.'],['⚡','Respon Cepat','Satu PIC, update progres rutin, buka 24 jam.'],['🛡️','Garansi 1 Tahun','Bug fixing gratis setelah launch.'],['🔒','Aman & Scalable','Tech modern, siap integrasi AI.'],['🏆','Teruji','Produk kami peraih penghargaan startup.']].map(([i,t,d]) => (
-        <div class="card p-6 reveal flex gap-4"><div class="text-3xl">{i}</div><div><h3 class="font-extrabold">{t}</h3><p class="muted text-sm mt-1">{d}</p></div></div>))}
-    </div>
-    <div class="flex flex-wrap gap-3 mt-8">{awards.map((a,i) => <span class="sticker" style={`--r:${i%2?2:-2}deg`}>🏆 {a}</span>)}</div>
+    <div class="flex flex-wrap gap-3 mt-8">{awards.map((a,i) => <span class="sticker" style={`--r:${i%2?2:-2}deg`}>{a}</span>)}</div>
   </div>
 </section>
 
-<!-- PORTOFOLIO -->
-<section id="portofolio" class="bg-surface">
+<section id="portofolio" class="bg-surface spot">
   <div class="wrap">
     <p class="eyebrow">Hasil nyata</p>
-    <h2 class="h2 mt-2 max-w-3xl">Karya yang <span class="hl">bicara</span>.</h2>
+    <h2 class="h2 mt-2 max-w-3xl">Proyek yang sudah <span class="hl">berlayar</span>.</h2>
     <div class="flex flex-wrap gap-3 mt-8" role="tablist">
       {cats.map((c,i) => <button class={`btn btn-ghost !py-2 !px-4 text-sm filter ${i===0?'!bg-gold-400 !text-ink !border-ink':''}`} data-f={c}>{c}</button>)}
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-      {portfolio.map(p => (
-        <article class="card overflow-hidden pf" data-cat={p.cat}>
-          <div class={`h-44 bg-gradient-to-br ${p.c} grid place-items-center text-7xl border-b-[3px] border-ink`} role="img" aria-label={`Mockup ${p.title}`}>{p.emoji}</div>
-          <div class="p-5">
-            <span class="text-xs font-bold muted uppercase tracking-wider">{p.cat}</span>
-            <h3 class="font-extrabold text-lg mt-1">{p.title}</h3>
-            <p class="mt-3"><span class="sticker">📈 {p.metric}</span></p>
-          </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+      {portfolio.map((p,i) => (
+        <article class="wanted pf" data-cat={p.cat} style={`transform:rotate(${rot[i]}deg)`}>
+          <span class="tape"></span>
+          <p class="font-hand text-4xl text-center leading-none tracking-widest">PROYEK</p>
+          <div class="mt-2 border-[3px] border-[#2b1a10] bg-[#f6ecd0] aspect-[16/9]"><Mock kind={p.kind} /></div>
+          <h3 class="font-extrabold text-lg mt-3 text-center leading-tight">{p.title}</h3>
+          <p class="text-center text-xs font-bold uppercase tracking-wider opacity-70">{p.cat}</p>
+          <p class="bounty text-center mt-1 text-[#6d28d9]">{p.metric}</p>
         </article>))}
     </div>
-    <p class="muted text-xs mt-6">* Contoh proyek ilustratif. Minta demo &amp; studi kasus asli saat konsultasi.</p>
+    <p class="muted text-xs mt-8">* Contoh proyek ilustratif. Demo dan studi kasus asli kami tunjukkan saat konsultasi.</p>
   </div>
 </section>
 
-<!-- HARGA -->
-<section id="harga">
+<section id="harga" class="spot">
   <div class="wrap">
     <p class="eyebrow">Paket</p>
     <h2 class="h2 mt-2 max-w-3xl">Mulai dari yang <span class="hl">pas</span> di kantongmu.</h2>
-    <div class="grid md:grid-cols-3 gap-6 mt-10 items-stretch">
-      {[
-        ['Starter','UMKM','Rp500rb','Landing page / company profile',['Desain custom responsif','SEO dasar','Integrasi WhatsApp','Garansi 1 tahun']],
-        ['Growth','Bisnis berkembang','Rp5 juta','Web app, LMS, CRM, aplikasi mobile',['Fitur sesuai alur bisnis','Dashboard admin','Integrasi payment/WA','Garansi 1 tahun'],true],
-        ['Enterprise','Korporasi','Custom','ERP, sistem terintegrasi, AI',['Analisis kebutuhan mendalam','Integrasi sistem lama','NDA tersedia','Garansi 1 tahun']],
-      ].map(([n,w,p,d,f,hot]) => (
-        <div class={`card p-7 relative reveal ${hot ? 'md:-translate-y-4 !shadow-[8px_8px_0_var(--color-gold-400)]' : ''}`}>
-          {hot && <span class="sticker absolute -top-4 right-5">🔥 Paling Laris</span>}
-          <p class="eyebrow">{w}</p><h3 class="font-display text-3xl font-extrabold">{n}</h3>
+    <div class="grid md:grid-cols-3 gap-7 mt-12 items-stretch">
+      {tiers.map(([n,w,p,d,f,hot]) => (
+        <div class={`card p-7 relative reveal flex flex-col ${hot ? 'md:-translate-y-5' : ''}`} style={hot ? 'border-color:var(--color-gold-400)' : ''}>
+          {hot && <span class="sticker font-hand !text-lg absolute -top-4 right-5">Paling laris</span>}
+          <p class="eyebrow">{w}</p><h3 class="font-hand text-5xl tracking-wide">{n}</h3>
           <p class="mt-3 muted text-sm">{p === 'Custom' ? 'Harga' : 'Mulai dari'}</p>
-          <p class="font-display text-4xl font-extrabold hl">{p === 'Custom' ? 'Custom Quote' : p}</p>
+          <p class="font-display text-4xl font-extrabold hl">{p === 'Custom' ? 'Custom quote' : p}</p>
           <p class="mt-2 text-sm font-bold">{d}</p>
-          <ul class="mt-5 grid gap-2 text-sm">{f.map(x => <li>✅ {x}</li>)}</ul>
-          <a href={waLink(`Halo Transbara Dev, saya tertarik paket ${n}.`)} class="btn btn-gold w-full mt-6">Konsultasi Gratis</a>
+          <ul class="mt-5 grid gap-2 text-sm grow">{f.map(x => <li class="flex gap-2"><Icon n="check" class="w-4 h-4 mt-0.5 text-gold-400 shrink-0" />{x}</li>)}</ul>
+          <a href={waLink(`Halo Transbara Dev, saya tertarik paket ${n}.`)} class="btn btn-gold w-full mt-6">Konsultasi gratis</a>
         </div>))}
     </div>
   </div>
 </section>
 
-<!-- PROSES -->
-<section id="proses" class="bg-surface">
+<section id="proses" class="bg-surface spot">
   <div class="wrap">
     <p class="eyebrow">Proses kerja</p>
-    <h2 class="h2 mt-2 max-w-3xl">Jelas dari awal, <span class="hl">no drama</span>.</h2>
-    <ol class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+    <h2 class="h2 mt-2 max-w-3xl">Rute pelayarannya <span class="hl">jelas</span> dari awal.</h2>
+    <ol class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 mt-12">
       {process.map(([t,d,o],i) => (
         <li class="card p-6 reveal relative">
-          <span class="font-display text-6xl font-extrabold hl absolute top-2 right-5 opacity-80">{i+1}</span>
-          <h3 class="font-extrabold text-xl pr-12">{t}</h3><p class="muted mt-2 text-sm">{d}</p>
-          <p class="mt-4"><span class="sticker" style="--r:-1deg">Output: {o}</span></p>
+          <span class="absolute -top-5 -left-3 w-12 h-12 rounded-full bg-gold-400 text-ink border-[3px] border-ink grid place-items-center font-hand text-2xl" style="box-shadow:3px 3px 0 var(--line)">{i+1}</span>
+          <h3 class="font-extrabold text-xl mt-3">{t}</h3><p class="muted mt-2 text-sm">{d}</p>
+          <p class="mt-4 text-xs font-bold uppercase tracking-wider text-gold-400">Hasil: {o}</p>
         </li>))}
     </ol>
   </div>
 </section>
 
-<!-- TESTIMONI -->
-<section id="testimoni">
+<section id="testimoni" class="spot">
   <div class="wrap">
     <p class="eyebrow">Kata mereka</p>
-    <h2 class="h2 mt-2 max-w-3xl">Client <span class="hl">happy</span>, kami lebih happy.</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+    <h2 class="h2 mt-2 max-w-3xl">Client senang, <span class="hl">kami lebih senang</span>.</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-14 mt-12">
       {testimonials.map(t => (
-        <figure class="card p-6 reveal">
-          <div aria-label={`${t.s} dari 5 bintang`}>{'⭐'.repeat(t.s)}</div>
-          <blockquote class="mt-3 font-bold">“{t.q}”</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3">
-            <span class="w-11 h-11 rounded-full bg-grape-500 text-white font-extrabold grid place-items-center border-2 border-ink">{t.name[0]}</span>
+        <figure class="reveal">
+          <div class="bubble">
+            <div class="flex gap-0.5 text-[#d97706]" aria-label={`${t.s} dari 5 bintang`}>{Array.from({length:t.s}).map(() => <Icon n="star" fill class="w-4 h-4" />)}</div>
+            <blockquote class="mt-3 font-bold">{t.q}</blockquote>
+          </div>
+          <figcaption class="mt-7 ml-3 flex items-center gap-3">
+            <span class="w-11 h-11 rounded-full bg-grape-500 text-white font-hand text-2xl grid place-items-center border-2 border-ink">{t.name[0]}</span>
             <span class="text-sm"><b>{t.name}</b><br><span class="muted">{t.role}, {t.co}</span></span>
           </figcaption>
         </figure>))}
     </div>
-    <p class="muted text-xs mt-6">* Testimoni contoh (dummy), akan diganti testimoni asli client.</p>
+    <p class="muted text-xs mt-8">* Testimoni contoh, akan diganti testimoni asli client.</p>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="bg-surface">
+<section id="faq" class="bg-surface spot">
   <div class="wrap max-w-3xl">
     <p class="eyebrow">FAQ</p>
     <h2 class="h2 mt-2">Biar nggak <span class="hl">ragu</span>.</h2>
     <div class="grid gap-4 mt-8">
       {faqs.map(([q,a]) => (
-        <details class="card p-5"><summary class="font-extrabold flex justify-between gap-4">{q}<span class="plus text-2xl leading-none">+</span></summary><p class="muted mt-3">{a}</p></details>))}
+        <details class="card p-5"><summary class="font-extrabold flex justify-between items-center gap-4">{q}<Icon n="plus" class="plus w-5 h-5 shrink-0" /></summary><p class="muted mt-3">{a}</p></details>))}
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section id="konsultasi">
+<section id="konsultasi" class="spot">
   <div class="wrap grid lg:grid-cols-2 gap-10 items-center">
     <div>
-      <span class="sticker">🎁 Gratis, tanpa kewajiban order</span>
-      <h2 class="h2 mt-4">Siap <span class="hl">Deliver Happiness</span> ke Bisnismu?</h2>
-      <p class="muted mt-4">Ceritakan kebutuhanmu, kami balas lewat WhatsApp. Konsultasi, proposal &amp; estimasi gratis.</p>
-      <ul class="mt-6 grid gap-2 font-bold">
-        <li>💬 <a href={waLink()} class="underline">{site.phone}</a></li>
-        <li>✉️ <a href={`mailto:${site.email}`} class="underline">{site.email}</a></li>
-        <li>🕒 Buka 24 jam</li>
-        <li>📍 {site.address}</li>
+      <span class="sticker font-hand !text-lg">Gratis, tanpa kewajiban order</span>
+      <h2 class="h2 mt-4">Siap <span class="hl">deliver happiness</span> ke bisnismu?</h2>
+      <p class="muted mt-4">Ceritakan kebutuhanmu, kami balas lewat WhatsApp. Konsultasi, proposal, dan estimasi biaya tidak dipungut biaya.</p>
+      <ul class="mt-6 grid gap-3 font-bold">
+        <li class="flex gap-3"><Icon n="chat" class="w-5 h-5 text-gold-400" /><a href={waLink()} class="underline">{site.phone}</a></li>
+        <li class="flex gap-3"><Icon n="mail" class="w-5 h-5 text-gold-400" /><a href={`mailto:${site.email}`} class="underline">{site.email}</a></li>
+        <li class="flex gap-3"><Icon n="clock" class="w-5 h-5 text-gold-400" />Buka 24 jam</li>
+        <li class="flex gap-3"><Icon n="pin" class="w-5 h-5 text-gold-400 shrink-0" />{site.address}</li>
       </ul>
     </div>
     <form id="lead" class="card p-6 grid gap-4" novalidate>
       <label class="font-bold text-sm">Nama*<input name="nama" required autocomplete="name" class="field mt-1" /></label>
       <label class="font-bold text-sm">No. WhatsApp*<input name="wa" required inputmode="tel" autocomplete="tel" class="field mt-1" placeholder="08xx" /></label>
-      <label class="font-bold text-sm">Nama Bisnis / Perusahaan<input name="bisnis" class="field mt-1" /></label>
+      <label class="font-bold text-sm">Nama bisnis / perusahaan<input name="bisnis" class="field mt-1" /></label>
       <label class="font-bold text-sm">Kebutuhan*
         <select name="butuh" required class="field mt-1">{services.map(s => <option>{s.title}</option>)}</select></label>
       <label class="font-bold text-sm">Range budget
@@ -229,7 +219,7 @@ const awards = ['1st Winner Indigo Betalist','Top 10 Hetero for Startup','Top 10
       <label class="font-bold text-sm">Ceritakan kebutuhanmu<textarea name="cerita" rows="3" class="field mt-1"></textarea></label>
       <input name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
       <p id="err" class="text-red-400 text-sm font-bold" role="alert"></p>
-      <button class="btn btn-gold text-lg" type="submit">Kirim via WhatsApp 🚀</button>
+      <button class="btn btn-gold text-lg" type="submit">Kirim lewat WhatsApp</button>
     </form>
   </div>
 </section>
@@ -237,15 +227,15 @@ const awards = ['1st Winner Indigo Betalist','Top 10 Hetero for Startup','Top 10
 
 <footer class="bg-grape-900 text-smoke-50 border-t-4 border-gold-400 py-12">
   <div class="wrap grid md:grid-cols-3 gap-8 text-sm">
-    <div><img src="/img/logo.webp" alt="Transbara Dev" width="180" height="120" loading="lazy" class="h-24 w-auto" /><p class="mt-3 font-display font-extrabold text-lg text-gold-400">Deliver the Happiness</p></div>
+    <div><img src="/img/logo.webp" alt="Transbara Dev" width="180" height="120" loading="lazy" class="h-24 w-auto" /><p class="mt-3 font-hand text-3xl tracking-wide text-gold-400">Deliver the Happiness</p></div>
     <div><h3 class="font-extrabold mb-3">Layanan</h3><ul class="grid gap-1">{services.slice(0,6).map(s => <li><a href="#layanan">{s.title}</a></li>)}</ul></div>
     <address class="not-italic"><h3 class="font-extrabold mb-3">Kontak</h3>
       <p>{site.address}</p><p class="mt-2">WA: <a href={waLink()} class="underline">{site.phone}</a></p><p>{site.email}</p><p>Buka 24 jam</p></address>
   </div>
-  <p class="wrap mt-8 text-xs opacity-70">© {new Date().getFullYear()} Transbara Dev — Software House Malang. Dibuat dengan ❤️ di Malang.</p>
+  <p class="wrap mt-8 text-xs opacity-70">© {new Date().getFullYear()} Transbara Dev, software house Malang.</p>
 </footer>
 
-<a href={waLink()} class="fixed bottom-5 right-5 z-50 btn btn-gold !rounded-full !p-4 text-2xl" aria-label="Chat WhatsApp Transbara Dev" id="fab">💬</a>
+<a href={waLink()} class="fixed bottom-5 right-5 z-50 btn btn-gold !rounded-full !p-4" aria-label="Chat WhatsApp Transbara Dev" id="fab"><Icon n="chat" class="w-7 h-7" /></a>
 </Base>
 
 <script define:vars={{ wa: site.wa }}>
@@ -258,6 +248,7 @@ $$('.filter').forEach(b => b.onclick = () => {
   $$('.filter').forEach(x => x.classList.remove('!bg-gold-400', '!text-ink', '!border-ink')); b.classList.add('!bg-gold-400', '!text-ink', '!border-ink');
   $$('.pf').forEach(c => c.style.display = b.dataset.f === 'Semua' || c.dataset.cat === b.dataset.f ? '' : 'none');
 });
+$$('.spot').forEach(sp => sp.addEventListener('pointermove', e => { const r = sp.getBoundingClientRect(); sp.style.setProperty('--mx', (e.clientX - r.left) + 'px'); sp.style.setProperty('--my', (e.clientY - r.top) + 'px'); }));
 const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))), { threshold: .12 });
 $$('.reveal').forEach(el => io.observe(el));
 $('#lead').onsubmit = e => {
