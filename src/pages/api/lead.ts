@@ -8,7 +8,8 @@ const json = (b: unknown, status = 200) => new Response(JSON.stringify(b), { sta
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   const f = await request.json().catch(() => null);
   if (!f || f.website) return json({ ok: true }); // honeypot: pura-pura sukses
-  const now = Date.now(), ip = clientAddress ?? 'x';
+  // di belakang nginx/Cloudflare, clientAddress selalu 127.0.0.1: pakai header proxy
+  const now = Date.now(), ip = request.headers.get('cf-connecting-ip') ?? request.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? clientAddress ?? 'x';
   const recent = (hits.get(ip) ?? []).filter(t => now - t < 10 * 60_000);
   if (recent.length >= 5) return json({ error: 'Terlalu banyak percobaan, coba lagi nanti.' }, 429);
   hits.set(ip, [...recent, now]);
